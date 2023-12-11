@@ -1,299 +1,230 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:lib_panda/models/Book.dart';
+import 'package:intl/intl.dart';
 
-class Biodata {
-  int id;
-  String name;
-  String email;
-  String gender;
-  DateTime birthday;
-  String phoneNumber;
-
-  Biodata({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.gender,
-    required this.birthday,
-    required this.phoneNumber,
-  });
-}
-
-class ProfilePage extends StatefulWidget {
+class BookListPage extends StatefulWidget {
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _BookListPageState createState() => _BookListPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
-  // Contoh data biodata (Anda dapat menggantinya dengan data aktual dari pengguna)
-  Biodata biodata = Biodata(
-    id: 1,
-    name: "John Doe",
-    email: "john.doe@example.com",
-    gender: "Male",
-    birthday: DateTime(1990, 1, 1),
-    phoneNumber: "1234567890",
-  );
+class _BookListPageState extends State<BookListPage> {
+  bool sortCategoryAscending = true;
+  bool sortPriceAscending = true;
+  bool sortPriceAscendingMemo = true;
+  bool isSearchVisible = false;
+  String selectedCategory = 'All Categories';
+  String searchText = '';
+  List<Book> listBook = <Book>[];
+  List<Book> listBookOriginal = <Book>[];
+  List<String> categories = <String>[];
+  List<Book> listBookPrice = <Book>[];
+  List<Book> listBookCategories = <Book>[];
+
+  void sortBooks(List<Book> listBookParam,  String category, String name, bool checkPrice) {
+    setState(() {
+      if (name.length == 0) {
+        listBook = listBookOriginal;
+      }
+      listBook = listBookParam
+          .where((book) =>
+          book.fields.title.toLowerCase().contains(name.toLowerCase()))
+          .toList();
+
+      List<Book> listBookTemp = <Book>[];
+      listBookTemp.length;
+
+      selectedCategory = category;
+      if (category != 'All Categories') {
+        for (int i = 0; i < listBook.length; i++) {
+          if(listBook[i].fields.categories == (category)) {
+            listBookTemp.add(listBook[i]);
+          }
+        }
+        listBook = listBookTemp;
+      }
+
+      if (checkPrice) {
+        listBook.sort((a, b) =>
+        sortPriceAscending ? a.fields.price.compareTo(b.fields.price) : b.fields.price.compareTo(a.fields.price));
+
+        sortPriceAscending = !sortPriceAscending;
+      }
+      else {
+        sortPriceAscending = !sortPriceAscending;
+
+        listBook.sort((a, b) =>
+        sortPriceAscending ? a.fields.price.compareTo(b.fields.price) : b.fields.price.compareTo(a.fields.price));
+
+        sortPriceAscending = !sortPriceAscending;
+      }
+    });
+  }
+
+  Future<List<Book>> fetchBook() async {
+    // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+    var url = Uri.parse(
+        'https://libpanda-e15-tk.pbp.cs.ui.ac.id/api/books');
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    if (!categories.contains('All Categories')) {
+      categories.add('All Categories');
+    }
+
+    List<Book> list_book = [];
+    for (var d in data) {
+      if (d != null) {
+        if (!categories.contains(Book.fromJson(d).fields.categories)) {
+          categories.add(Book.fromJson(d).fields.categories);
+        }
+        list_book.add(Book.fromJson(d));
+      }
+    }
+
+    if (listBookOriginal.length == 0) {
+      listBook.length;
+      listBook = list_book;
+      listBookOriginal = list_book;
+    }
+
+    return list_book;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile Page'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    size: 30,
-                    color: Colors.black,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    'Account Information',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
-              SizedBox(height: 4),
-              Card(
-                elevation: 5,
+        appBar: AppBar(
+          title: const Text(
+              'Library',
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+          actions: [
+            if (isSearchVisible)
+              Flexible(
+                fit: FlexFit.loose,
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${biodata.name}',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text('${biodata.phoneNumber}'),
-                      Text('${biodata.email}'),
-                      SizedBox(height: 8),
-                      Align(
-                        alignment: Alignment.center,
-                        child: FractionallySizedBox(
-                          widthFactor: 1.0, // Set to 1.0 to make it fill the available width
-                          child: ElevatedButton(
-                            onPressed: () {
-                              _showEditBiodataDialog(context);
-                            },
-                            child: Text('Edit Biodata'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 40),
-              Row(
-                children: [
-                  Icon(
-                    Icons.account_balance_wallet,
-                    size: 30,
-                    color: Colors.black,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    'Balance',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
-              SizedBox(height: 4),
-              Card(
-                elevation: 5,
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        'Rp100.00',
-                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      Align(
-                        alignment: Alignment.center,
-                        child: FractionallySizedBox(
-                          widthFactor: 1.0, //
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Aksi yang dijalankan saat tombol ditekan
-                              // Contoh: Menampilkan dialog untuk top-up saldo
-                              _showTopUpDialog(context);
-                            },
-                            child: Text('Top-Up Wallet'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Future<void> _showTopUpDialog(BuildContext context) async {
-    // List of available payment methods
-    List<String> paymentMethods = ['Credit Card', 'Bank Transfer', 'e-Wallet'];
-
-    // Selected payment method (initialize with the first method)
-    String selectedPaymentMethod = paymentMethods[0];
-
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-                  'Top-Up Wallet',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-                ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Masukkan jumlah saldo yang ingin di-top up:'),
-                SizedBox(height: 10),
-                TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Jumlah Saldo'),
-                  onChanged: (value) {
-                    // Update saldoWallet sesuai input pengguna
-                    // saldoWallet = double.tryParse(value) ?? saldoWallet;
-                  },
-                ),
-                SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Payment Method',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Align(
-                  alignment: Alignment.center,
-                  child: FractionallySizedBox(
-                    widthFactor: 0.78, // Sesuaikan faktor lebar sesuai kebutuhan
-                    child: DropdownMenu<String>(
-                      initialSelection: selectedPaymentMethod,
-                      onSelected: (String? newValue) {
-                        setState(() {
-                          selectedPaymentMethod = newValue!;
-                        });
-                      },
-                      dropdownMenuEntries: paymentMethods.map<DropdownMenuEntry<String>>((String value) {
-                        return DropdownMenuEntry<String>(value: value, label: value);
-                      }).toList(),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: TextField(
+                    onChanged: (value) {
+                      searchText = value;
+                      sortBooks(listBookOriginal, selectedCategory, searchText, false);
+                    },
+                    decoration: searchText.compareTo('') == 0
+                        ? InputDecoration(
+                      hintText: 'Search by book name...',
+                    ) :
+                    InputDecoration(
+                      hintText: searchText,
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
+              ),
+            IconButton(
+              icon: Icon(Icons.search,
+              size: 28.0,),
               onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Batal'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Lakukan proses top-up atau panggil fungsi top-up sesuai kebutuhan
-                // Contoh: _topUpWallet(selectedPaymentMethod);
-                print(selectedPaymentMethod);
-                Navigator.of(context).pop();
-              },
-              child: Text('Top-Up'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-
-  // Fungsi untuk menampilkan dialog edit biodata
-  Future<void> _showEditBiodataDialog(BuildContext context) async {
-    // Contoh controller untuk menerima input dari pengguna
-    TextEditingController nameController = TextEditingController(text: biodata.name);
-    TextEditingController emailController = TextEditingController(text: biodata.email);
-    TextEditingController genderController = TextEditingController(text: biodata.gender);
-    TextEditingController birthdayController = TextEditingController(text: biodata.birthday.toString());
-    TextEditingController phoneNumberController = TextEditingController(text: biodata.phoneNumber);
-
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Edit Biodata'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                TextField(
-                  controller: nameController,
-                  decoration: InputDecoration(labelText: 'Name'),
-                ),
-                TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
-                ),
-                TextField(
-                  controller: genderController,
-                  decoration: InputDecoration(labelText: 'Gender'),
-                ),
-                TextField(
-                  controller: birthdayController,
-                  decoration: InputDecoration(labelText: 'Birthday'),
-                ),
-                TextField(
-                  controller: phoneNumberController,
-                  decoration: InputDecoration(labelText: 'Phone Number'),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Batal'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Lakukan proses penyimpanan biodata sesuai input pengguna
                 setState(() {
-                  biodata.name = nameController.text;
-                  biodata.email = emailController.text;
-                  biodata.gender = genderController.text;
-                  biodata.birthday = DateTime.parse(birthdayController.text);
-                  biodata.phoneNumber = phoneNumberController.text;
+                  isSearchVisible = !isSearchVisible;
                 });
-                Navigator.of(context).pop();
               },
-              child: Text('Simpan'),
             ),
           ],
-        );
-      },
-    );
+        ),
+
+        body: FutureBuilder(
+            future: fetchBook(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.data == null) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                if (!snapshot.hasData) {
+                  return const Column(
+                    children: [
+                      Text(
+                        "Tidak ada data buku.",
+                        style:
+                        TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                      ),
+                      SizedBox(height: 8),
+                    ],
+                  );
+                } else {
+                  return CustomScrollView(
+                    slivers: [
+                      SliverAppBar(
+                        pinned: true,
+                        flexibleSpace: FlexibleSpaceBar(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              DropdownButton<String>(
+                                value: selectedCategory,
+                                items: categories.map((String category) {
+                                  return DropdownMenuItem<String>(
+                                    value: category,
+                                    child: Text(category),
+                                  );
+                                }).toList(),
+                                onChanged: (String? newValue) {
+                                  sortBooks(listBookOriginal, newValue!, searchText, false);
+                                },
+                              ),
+                              SizedBox(width: 20),
+                              InkWell(
+                                onTap: () {
+                                  sortBooks(listBookOriginal, selectedCategory, searchText, true); },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Price',
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black),),
+                                    Icon(sortPriceAscending ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                              (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                elevation: 5,
+                                child: ListTile(
+                                  contentPadding: EdgeInsets.all(8),
+                                  leading: Container(
+                                    width: 80,
+                                    height: 80,
+                                    child: Image.network('${listBook[index].fields.thumbnail}'),
+                                  ),
+                                  title: Text("${listBook[index].fields.title}"),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
+                                    children: [
+                                      Text('Category: ${listBook[index].fields.categories}'),
+                                      Text('Price: ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listBook[index].fields.price)}'),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: listBook.length,
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              }
+            }));
   }
 }
