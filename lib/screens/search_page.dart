@@ -12,15 +12,12 @@ class BookListPage extends StatefulWidget {
 class _BookListPageState extends State<BookListPage> {
   bool sortCategoryAscending = true;
   bool sortPriceAscending = true;
-  bool sortPriceAscendingMemo = true;
   bool isSearchVisible = false;
   String selectedCategory = 'All Categories';
   String searchText = '';
   List<Book> listBook = <Book>[];
   List<Book> listBookOriginal = <Book>[];
   List<String> categories = <String>[];
-  List<Book> listBookPrice = <Book>[];
-  List<Book> listBookCategories = <Book>[];
 
   void sortBooks(List<Book> listBookParam,  String category, String name, bool checkPrice) {
     setState(() {
