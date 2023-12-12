@@ -288,7 +288,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   if (response['status'] == 'success') {
                     ScaffoldMessenger.of(context)
                         .showSnackBar(const SnackBar(
-                      content: Text("TopUp Success!"),
+                      content: Text("TopUp Successful!"),
                     ));
                     Navigator.pushReplacement(
                       context,
@@ -298,7 +298,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ScaffoldMessenger.of(context)
                         .showSnackBar(const SnackBar(
                       content:
-                      Text("TopUp Failed, please try again."),
+                      Text("TopUp failed, please try again."),
                     ));
                   }
                 }

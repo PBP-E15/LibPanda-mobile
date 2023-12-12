@@ -67,10 +67,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
-            );
+            Navigator.pop(context);
           },
         ),
       ),
@@ -181,12 +178,9 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                   ElevatedButton(
                     onPressed: () {
                       // Navigator.of(context).pop();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()),
-                      );
+                      Navigator.pop(context);
                     },
-                    child: Text('Batal'),
+                    child: Text('Cancel'),
                   ),
                   ElevatedButton(
                     onPressed: () async {
@@ -205,25 +199,34 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                               // TODO: Sesuaikan field data sesuai dengan aplikasimu
                             }));
 
-                        if (response['status'] == 'success') {
+                        if (nameController.text.compareTo(widget.biodata.fields.name) == 0 &&
+                            emailController.text.compareTo(widget.biodata.fields.email) == 0 &&
+                            genderController.text.compareTo(widget.biodata.fields.gender) == 0 &&
+                            birthdayController.text.compareTo(widget.biodata.fields.birthday.toString().split(' ')[0]) == 0 &&
+                            phoneNumberController.text.compareTo(widget.biodata.fields.phoneNumber) == 0 &&
+                            birthdayOriginal.compareTo(widget.biodata.fields.birthday) == 0) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content:
+                              Text("You haven't made any changes."),
+                            ));
+                        }
+                        else if (response['status'] == 'success') {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
-                            content: Text("Produk baru berhasil disimpan!"),
+                            content: Text("Edit Succesful!"),
                           ));
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => ProfilePage()),
-                          );
+                          Navigator.pop(context);
                         } else {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
                             content:
-                            Text("Terdapat kesalahan, silakan coba lagi."),
+                            Text("Edit failed, please try again."),
                           ));
                         }
                       }
                     },
-                    child: Text('Simpan'),
+                    child: Text('Save'),
                   ),
                 ],
               ),
