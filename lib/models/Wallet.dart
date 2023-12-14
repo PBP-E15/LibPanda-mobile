@@ -1,25 +1,25 @@
 // To parse this JSON data, do
 //
-//     final biodata = biodataFromJson(jsonString);
+//     final wallet = walletFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Biodata> biodataFromJson(String str) => List<Biodata>.from(json.decode(str).map((x) => Biodata.fromJson(x)));
+List<Wallet> walletFromJson(String str) => List<Wallet>.from(json.decode(str).map((x) => Wallet.fromJson(x)));
 
-String biodataToJson(List<Biodata> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String walletToJson(List<Wallet> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Biodata {
+class Wallet {
   String model;
   int pk;
   Fields fields;
 
-  Biodata({
+  Wallet({
     required this.model,
     required this.pk,
     required this.fields,
   });
 
-  factory Biodata.fromJson(Map<String, dynamic> json) => Biodata(
+  factory Wallet.fromJson(Map<String, dynamic> json) => Wallet(
     model: json["model"],
     pk: json["pk"],
     fields: Fields.fromJson(json["fields"]),
