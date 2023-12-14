@@ -97,6 +97,7 @@ class _BookListPageState extends State<BookListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.grey[800],
           title: const Text(
               'Library',
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
@@ -114,9 +115,11 @@ class _BookListPageState extends State<BookListPage> {
                     decoration: searchText.compareTo('') == 0
                         ? InputDecoration(
                       hintText: 'Search by book name...',
+                      hintStyle: TextStyle(color: Colors.white),
                     ) :
                     InputDecoration(
                       hintText: searchText,
+                      hintStyle: TextStyle(color: Colors.white), 
                     ),
                   ),
                 ),
@@ -154,6 +157,7 @@ class _BookListPageState extends State<BookListPage> {
                   return CustomScrollView(
                     slivers: [
                       SliverAppBar(
+                        backgroundColor: Color.fromARGB(255, 74, 113, 220),
                         pinned: true,
                         flexibleSpace: FlexibleSpaceBar(
                           title: Row(
@@ -164,7 +168,12 @@ class _BookListPageState extends State<BookListPage> {
                                 items: categories.map((String category) {
                                   return DropdownMenuItem<String>(
                                     value: category,
-                                    child: Text(category),
+                                    child: Text(
+                                      category,
+                                      style: TextStyle(
+                                        color: Colors.white, // Set text color to white
+                                      ),
+                                    ),
                                   );
                                 }).toList(),
                                 onChanged: (String? newValue) {
@@ -179,7 +188,7 @@ class _BookListPageState extends State<BookListPage> {
                                   children: [
                                     Text(
                                       'Price',
-                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black),),
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),),
                                     Icon(sortPriceAscending ? Icons.arrow_drop_up : Icons.arrow_drop_down),
                                   ],
                                 ),

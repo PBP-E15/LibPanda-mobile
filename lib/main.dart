@@ -20,10 +20,25 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: MaterialApp(
-          title: 'Flutter App',
+          title: 'LibPanda',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-            useMaterial3: true,
+            //brightness: Brightness.light, // Use a light theme for a more modern feel
+            primaryColor: Colors.indigo, // Update primary color
+
+            scaffoldBackgroundColor: const Color(0xFF1E1E1E), // Dark grey color
+
+           
+            textTheme: const TextTheme(
+              titleLarge: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+              bodyMedium: TextStyle(
+                fontSize: 14.0,
+                color: Colors.black54,
+              ),
+            ),
           ),
           home: BookHomePage()),
     );
