@@ -8,6 +8,7 @@ import 'package:lib_panda/screens/book_details.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/screens/search_page.dart';
 import 'package:lib_panda/widgets/navbar.dart';
+import 'package:lib_panda/screens/request_books.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -58,7 +59,10 @@ class _BookHomePageState extends State<BookHomePage> {
         );
         break;
       case 2:
-
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeRequest()),
+        );
         break;
       case 3:
 
