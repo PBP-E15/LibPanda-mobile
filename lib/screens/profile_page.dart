@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/biodata_edit_form.dart';
 import 'package:lib_panda/models/Biodata.dart';
+import 'package:lib_panda/screens/home_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +15,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // Contoh data biodata (Anda dapat menggantinya dengan data aktual dari pengguna)
   String? selectedGender = '';
   List<Biodata> listBiodata = <Biodata>[];
   List<Wallet> listWallet = <Wallet>[];
@@ -53,13 +53,14 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Page', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),),
+        title: Text('Profile Page'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pop(context);
           },
         ),
+        backgroundColor: Colors.grey[800],
       ),
       body: FutureBuilder(
             future: fetchBiodataAndWallet(),
@@ -91,18 +92,19 @@ class _ProfilePageState extends State<ProfilePage> {
                               Icon(
                                 Icons.person,
                                 size: 30,
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                               SizedBox(width: 8),
                               Text(
                                 'Account Information',
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w600),
+                                    fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
                               ),
                             ],
                           ),
                           SizedBox(height: 4),
                           Card(
+                            color: Colors.grey[800],
                             elevation: 5,
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
@@ -112,10 +114,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Text(
                                     '${listBiodata[0].fields.name}',
                                     style: TextStyle(fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                        fontWeight: FontWeight.bold, color: Colors.white),
                                   ),
-                                  Text('${listBiodata[0].fields.phoneNumber}'),
-                                  Text('${listBiodata[0].fields.email}'),
+                                  SizedBox(height: 8),
+                                  Text('${listBiodata[0].fields.phoneNumber}',
+                                    style: TextStyle(color: Colors.white)),
+                                  SizedBox(height: 4),
+                                  Text('${listBiodata[0].fields.email}',
+                                      style: TextStyle(color: Colors.white)),
                                   SizedBox(height: 8),
                                   Align(
                                     alignment: Alignment.center,
@@ -123,6 +129,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                       widthFactor: 1.0,
                                       // Set to 1.0 to make it fill the available width
                                       child: ElevatedButton(
+                                        style: ButtonStyle(
+                                          backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
+                                        ),
                                         onPressed: () {
                                           Navigator.push(context,
                                               MaterialPageRoute(builder: (context) => EditBiodataPage(biodata: listBiodata[0])));
@@ -141,18 +150,19 @@ class _ProfilePageState extends State<ProfilePage> {
                               Icon(
                                 Icons.account_balance_wallet,
                                 size: 30,
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                               SizedBox(width: 8),
                               Text(
                                 'Balance',
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w600),
+                                    fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
                               ),
                             ],
                           ),
                           SizedBox(height: 4),
                           Card(
+                            color: Colors.grey[800],
                             elevation: 5,
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
@@ -161,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Text(
                                     '${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listWallet[0].fields.balance)}',
                                     style: TextStyle(fontSize: 28,
-                                        fontWeight: FontWeight.bold),
+                                        fontWeight: FontWeight.bold, color: Colors.white),
                                   ),
                                   SizedBox(height: 8),
                                   Align(
@@ -169,6 +179,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: FractionallySizedBox(
                                       widthFactor: 1.0, //
                                       child: ElevatedButton(
+                                        style: ButtonStyle(
+                                          backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
+                                        ),
                                         onPressed: () {
                                           // Aksi yang dijalankan saat tombol ditekan
                                           // Contoh: Menampilkan dialog untuk top-up saldo
@@ -206,19 +219,27 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (BuildContext context) {
         final request = context.watch<CookieRequest>();
         return AlertDialog(
+          backgroundColor: Colors.grey[900],
           title: Text(
             'Top-Up Wallet',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white),
           ),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Masukkan jumlah saldo yang ingin di-top up:'),
+                Text('Masukkan jumlah saldo yang ingin di-top up:',
+                  style: TextStyle(
+                      color: Colors.white70,
+                  ),),
                 SizedBox(height: 10),
                 TextField(
                   controller: amountController,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Jumlah Saldo'),
+                  cursorColor: Colors.white,
+                  decoration: InputDecoration(labelText: 'Jumlah Saldo',
+                    labelStyle: TextStyle(
+                        color: Colors.white24,
+                    ),),
                   onChanged: (value) {
                     // You can perform additional validation here if needed
                   },
@@ -228,24 +249,27 @@ class _ProfilePageState extends State<ProfilePage> {
                   alignment: Alignment.center,
                   child: Text(
                     'Payment Method',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
                   ),
                 ),
                 SizedBox(height: 10),
                 Align(
                   alignment: Alignment.center,
-                  child: FractionallySizedBox(
-                    widthFactor: 0.78,
-                    child: DropdownMenu<String>(
-                      initialSelection: selectedPaymentMethod,
-                      onSelected: (String? newValue) {
-                        setState(() {
-                          selectedPaymentMethod = newValue!;
-                        });
-                      },
-                      dropdownMenuEntries: paymentMethods.map<DropdownMenuEntry<String>>((String value) {
-                        return DropdownMenuEntry<String>(value: value, label: value);
-                      }).toList(),
+                  child: new Theme(
+                    data: ThemeData.dark(),
+                    child: FractionallySizedBox(
+                      widthFactor: 0.5,
+                      child: DropdownMenu<String>(
+                        initialSelection: selectedPaymentMethod,
+                        onSelected: (String? newValue) {
+                          setState(() {
+                            selectedPaymentMethod = newValue!;
+                          });
+                        },
+                        dropdownMenuEntries: paymentMethods.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),
                     ),
                   ),
                 ),

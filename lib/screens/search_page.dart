@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:lib_panda/models/Book.dart';
 import 'package:intl/intl.dart';
+import 'package:lib_panda/screens/home_page.dart';
 
 class BookListPage extends StatefulWidget {
   @override
@@ -97,10 +98,15 @@ class _BookListPageState extends State<BookListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => BookHomePage()));
+            },
+          ),
+          title: Text('Library'),
           backgroundColor: Colors.grey[800],
-          title: const Text(
-              'Library',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
           actions: [
             if (isSearchVisible)
               Flexible(
@@ -108,6 +114,9 @@ class _BookListPageState extends State<BookListPage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: TextField(
+                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                      color: Colors.white,
+                    ),
                     onChanged: (value) {
                       searchText = value;
                       sortBooks(listBookOriginal, selectedCategory, searchText, false);
@@ -119,14 +128,15 @@ class _BookListPageState extends State<BookListPage> {
                     ) :
                     InputDecoration(
                       hintText: searchText,
-                      hintStyle: TextStyle(color: Colors.white), 
+                      hintStyle: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
               ),
             IconButton(
               icon: Icon(Icons.search,
-              size: 28.0,),
+                size: 28.0,
+                color: Colors.white,),
               onPressed: () {
                 setState(() {
                   isSearchVisible = !isSearchVisible;
@@ -135,7 +145,6 @@ class _BookListPageState extends State<BookListPage> {
             ),
           ],
         ),
-
         body: FutureBuilder(
             future: fetchBook(),
             builder: (context, AsyncSnapshot snapshot) {
@@ -157,7 +166,7 @@ class _BookListPageState extends State<BookListPage> {
                   return CustomScrollView(
                     slivers: [
                       SliverAppBar(
-                        backgroundColor: Color.fromARGB(255, 74, 113, 220),
+                        backgroundColor: Colors.grey[900],
                         pinned: true,
                         flexibleSpace: FlexibleSpaceBar(
                           title: Row(
@@ -203,6 +212,7 @@ class _BookListPageState extends State<BookListPage> {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Card(
+                                color: Colors.grey[800],
                                 elevation: 5,
                                 child: ListTile(
                                   contentPadding: EdgeInsets.all(8),
@@ -211,13 +221,18 @@ class _BookListPageState extends State<BookListPage> {
                                     height: 80,
                                     child: Image.network('${listBook[index].fields.thumbnail}'),
                                   ),
-                                  title: Text("${listBook[index].fields.title}"),
+                                  title: Text("${listBook[index].fields.title}",
+                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
                                   subtitle: Column(
                                     crossAxisAlignment: CrossAxisAlignment
                                         .start,
                                     children: [
-                                      Text('Category: ${listBook[index].fields.categories}'),
-                                      Text('Price: ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listBook[index].fields.price)}'),
+                                      SizedBox(height: 8),
+                                      Text('Category: ${listBook[index].fields.categories}',
+                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
+                                      SizedBox(height: 4),
+                                      Text('Price: ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listBook[index].fields.price)}',
+                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
                                     ],
                                   ),
                                 ),

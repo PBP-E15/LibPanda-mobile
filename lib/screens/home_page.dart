@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:lib_panda/models/Book.dart';
-
+import 'package:lib_panda/screens/search_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,11 +29,30 @@ class BookHomePage extends StatefulWidget {
 
 class _BookHomePageState extends State<BookHomePage> {
   late Future<List<Book>> futureBooks;
+  List<Book> listBook = <Book>[];
+  List<Book> listBookOriginal = <Book>[];
+  bool isSearchVisible = false;
+  String searchText = '';
 
   @override
   void initState() {
     super.initState();
     futureBooks = fetchBooks();
+  }
+
+  void sortBooks(List<Book> listBookParam, String name) {
+    setState(() {
+      if (name.length == 0) {
+        listBook = listBookOriginal;
+      }
+      listBook = listBookParam
+          .where((book) =>
+          book.fields.title.toLowerCase().contains(name.toLowerCase()))
+          .toList();
+
+      List<Book> listBookTemp = <Book>[];
+      listBookTemp.length;
+    });
   }
 
   Future<List<Book>> fetchBooks() async {
@@ -43,6 +62,12 @@ class _BookHomePageState extends State<BookHomePage> {
     if (response.statusCode == 200) {
       List<dynamic> jsonResponse = json.decode(response.body);
       List<Book> books = jsonResponse.map((book) => Book.fromJson(book)).toList();
+
+      if (listBookOriginal.length == 0) {
+        listBook.length;
+        listBook = books;
+        listBookOriginal = books;
+      }
 
       // Shuffle the list of books
       books.shuffle();
@@ -59,6 +84,43 @@ class _BookHomePageState extends State<BookHomePage> {
       appBar: AppBar(
         title: Text('LibPanda'),
         backgroundColor: Colors.grey[800],
+        actions: [
+          if (isSearchVisible)
+            Flexible(
+              fit: FlexFit.loose,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                    color: Colors.white,
+                  ),
+                  onChanged: (value) {
+                    searchText = value;
+                    sortBooks(listBookOriginal, searchText);
+                  },
+                  decoration: searchText.compareTo('') == 0
+                      ? InputDecoration(
+                    hintText: 'Search by book name...',
+                    hintStyle: TextStyle(color: Colors.white),
+                  ) :
+                  InputDecoration(
+                    hintText: searchText,
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          IconButton(
+            icon: Icon(Icons.search,
+              size: 28.0,
+              color: Colors.white,),
+            onPressed: () {
+              setState(() {
+                isSearchVisible = !isSearchVisible;
+              });
+            },
+          ),
+        ],
       ),
       body: Center(
         child: FutureBuilder<List<Book>>(
@@ -72,7 +134,7 @@ class _BookHomePageState extends State<BookHomePage> {
                   mainAxisSpacing: 8.0,
                 ),
                 padding: EdgeInsets.all(8.0),
-                itemCount: snapshot.data!.length,
+                itemCount: listBook.length,
                 itemBuilder: (context, index) {
                 return Card(
                   elevation: 5,
@@ -89,7 +151,7 @@ class _BookHomePageState extends State<BookHomePage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => BookDetailsPage(
-                              book: snapshot.data![index],
+                              book: listBook[index],
                             ),
                           ),
                         );
@@ -101,7 +163,7 @@ class _BookHomePageState extends State<BookHomePage> {
                           // Update image layout and placeholder
                           Expanded(
                               child: Image.network(
-                                snapshot.data![index].fields.thumbnail,
+                                listBook[index].fields.thumbnail,
                                 errorBuilder: (context, error, stackTrace) {
                                   return Placeholder(
                                     fallbackHeight: 100,
@@ -116,7 +178,7 @@ class _BookHomePageState extends State<BookHomePage> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text(
-                              snapshot.data![index].fields.title,
+                              listBook[index].fields.title,
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.headline6!.copyWith(
                                 fontWeight: FontWeight.bold,

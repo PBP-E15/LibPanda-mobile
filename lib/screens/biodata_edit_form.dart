@@ -61,176 +61,186 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     initialize();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Edit Biodata', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    return Theme (
+      data: ThemeData.dark(),
+      child: Scaffold(
+        backgroundColor: Colors.grey[900],
+        appBar: AppBar(
+          title: Text('Edit Biodata'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Name is required';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Email is required';
-                  } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
-                    return 'Enter a valid email address';
-                  }
-                  return null;
-                },
-              ),
-              ListTile(
-                title: Text('Gender'),
-                contentPadding: EdgeInsets.all(0),
-                subtitle: Row(
+        body: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: nameController,
+                  decoration: InputDecoration(labelText: 'Name'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Name is required';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: emailController,
+                  decoration: InputDecoration(labelText: 'Email'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Email is required';
+                    } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
+                      return 'Enter a valid email address';
+                    }
+                    return null;
+                  },
+                ),
+                ListTile(
+                  title: Text('Gender'),
+                  contentPadding: EdgeInsets.all(0),
+                  subtitle: Row(
+                    children: [
+                      Radio(
+                        value: 'male',
+                        groupValue: genderController.text,
+                        onChanged: (value) {
+                          setState(() {
+                            genderController.text = value.toString();
+                          });
+                        },
+                      ),
+                      Text('Male'),
+                      Radio(
+                        value: 'female',
+                        groupValue: genderController.text,
+                        onChanged: (value) {
+                          setState(() {
+                            genderController.text = value.toString();
+                          });
+                        },
+                      ),
+                      Text('Female'),
+                    ],
+                  ),
+                ),
+                TextFormField(
+                  controller: birthdayController,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    labelText: 'Birthday',
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.calendar_today),
+                      onPressed: () async {
+                        // Show date picker and wait for user to pick a date
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: birthdayOriginal,
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                        // Update the controller's text if a date is picked
+                        if (pickedDate != null) {
+                          setState(() {
+                            widget.biodata.fields.birthday = pickedDate;
+                            birthdayController.text = pickedDate.toLocal().toString().split(' ')[0];
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Birthday is required';
+                    }
+                    return null; // Return null if the input is valid
+                  },
+                ),
+                TextFormField(
+                  controller: phoneNumberController,
+                  decoration: InputDecoration(labelText: 'Phone Number'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Phone Number is required';
+                    } else if (!RegExp(r'^\+?[0-9]+$').hasMatch(value)) {
+                      return 'Enter a valid phone number';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Radio(
-                      value: 'male',
-                      groupValue: genderController.text,
-                      onChanged: (value) {
-                        setState(() {
-                          genderController.text = value.toString();
-                        });
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
+                      ),
+                      onPressed: () {
+                        // Navigator.of(context).pop();
+                        Navigator.pop(context);
                       },
+                      child: Text('Cancel'),
                     ),
-                    Text('Male'),
-                    Radio(
-                      value: 'female',
-                      groupValue: genderController.text,
-                      onChanged: (value) {
-                        setState(() {
-                          genderController.text = value.toString();
-                        });
-                      },
-                    ),
-                    Text('Female'),
-                  ],
-                ),
-              ),
-              TextFormField(
-                controller: birthdayController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  labelText: 'Birthday',
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.calendar_today),
-                    onPressed: () async {
-                      // Show date picker and wait for user to pick a date
-                      DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: birthdayOriginal,
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime.now(),
-                      );
-                      // Update the controller's text if a date is picked
-                      if (pickedDate != null) {
-                        setState(() {
-                          widget.biodata.fields.birthday = pickedDate;
-                          birthdayController.text = pickedDate.toLocal().toString().split(' ')[0];
-                        });
-                      }
-                    },
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Birthday is required';
-                  }
-                  return null; // Return null if the input is valid
-                },
-              ),
-              TextFormField(
-                controller: phoneNumberController,
-                decoration: InputDecoration(labelText: 'Phone Number'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Phone Number is required';
-                  } else if (!RegExp(r'^\+?[0-9]+$').hasMatch(value)) {
-                    return 'Enter a valid phone number';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigator.of(context).pop();
-                      Navigator.pop(context);
-                    },
-                    child: Text('Cancel'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        // Kirim ke Django dan tunggu respons
-                        // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                        final response = await request.postJson(
-                            "http://10.0.2.2:8000/edit-biodata-flutter/${widget.biodata.pk}/",
-                            jsonEncode(<String, String>{
-                              'name': nameController.text,
-                              'email': emailController.text,
-                              'gender': genderController.text,
-                              'birthday': birthdayOriginal.toString().split(' ')[0],
-                              'phone_number': phoneNumberController.text,
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          // Kirim ke Django dan tunggu respons
+                          // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+                          final response = await request.postJson(
+                              "http://10.0.2.2:8000/edit-biodata-flutter/${widget.biodata.pk}/",
+                              jsonEncode(<String, String>{
+                                'name': nameController.text,
+                                'email': emailController.text,
+                                'gender': genderController.text,
+                                'birthday': birthdayOriginal.toString().split(' ')[0],
+                                'phone_number': phoneNumberController.text,
 
-                              // TODO: Sesuaikan field data sesuai dengan aplikasimu
-                            }));
+                                // TODO: Sesuaikan field data sesuai dengan aplikasimu
+                              }));
 
-                        if (nameController.text.compareTo(widget.biodata.fields.name) == 0 &&
-                            emailController.text.compareTo(widget.biodata.fields.email) == 0 &&
-                            genderController.text.compareTo(widget.biodata.fields.gender) == 0 &&
-                            birthdayController.text.compareTo(widget.biodata.fields.birthday.toString().split(' ')[0]) == 0 &&
-                            phoneNumberController.text.compareTo(widget.biodata.fields.phoneNumber) == 0 &&
-                            birthdayOriginal.compareTo(widget.biodata.fields.birthday) == 0) {
+                          if (nameController.text.compareTo(widget.biodata.fields.name) == 0 &&
+                              emailController.text.compareTo(widget.biodata.fields.email) == 0 &&
+                              genderController.text.compareTo(widget.biodata.fields.gender) == 0 &&
+                              birthdayController.text.compareTo(widget.biodata.fields.birthday.toString().split(' ')[0]) == 0 &&
+                              phoneNumberController.text.compareTo(widget.biodata.fields.phoneNumber) == 0 &&
+                              birthdayOriginal.compareTo(widget.biodata.fields.birthday) == 0) {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content:
                               Text("You haven't made any changes."),
                             ));
+                          }
+                          else if (response['status'] == 'success') {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("Edit Succesful!"),
+                            ));
+                            Navigator.pop(context);
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content:
+                              Text("Edit failed, please try again."),
+                            ));
+                          }
                         }
-                        else if (response['status'] == 'success') {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text("Edit Succesful!"),
-                          ));
-                          Navigator.pop(context);
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content:
-                            Text("Edit failed, please try again."),
-                          ));
-                        }
-                      }
-                    },
-                    child: Text('Save'),
-                  ),
-                ],
-              ),
-            ],
+                      },
+                      child: Text('Save'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
