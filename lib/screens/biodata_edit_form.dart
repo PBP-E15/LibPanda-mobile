@@ -196,7 +196,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                           // Kirim ke Django dan tunggu respons
                           // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                           final response = await request.postJson(
-                              "http://10.0.2.2:8000/edit-biodata-flutter/${widget.biodata.pk}/",
+                              "https://libpanda-e15-tk.pbp.cs.ui.ac.id/edit-biodata-flutter/${widget.biodata.pk}",
                               jsonEncode(<String, String>{
                                 'name': nameController.text,
                                 'email': emailController.text,

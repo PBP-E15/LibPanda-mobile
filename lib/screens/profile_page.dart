@@ -63,12 +63,12 @@ class _ProfilePageState extends State<ProfilePage> {
     // TEMPORARY LOGIN SAJA
     final request = context.watch<CookieRequest>();
     final user = await request.login("http://10.0.2.2:8000/auth/login/", {
-      'username': "hilangharapan",
-      'password': "burungdara123",
+      'username': "coba3",
+      'password': "libpanda123",
     });
 
     var url = Uri.parse(
-        'http://10.0.2.2:8000/get-biodata-flutter/${request.jsonData['biodata_pk']}');
+        'https://libpanda-e15-tk.pbp.cs.ui.ac.id/get-biodata-flutter/${request.jsonData['biodata_pk']}');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -81,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
 
     url = Uri.parse(
-        'http://10.0.2.2:8000/get-wallet-flutter/${request.jsonData['wallet_pk']}');
+        'https://libpanda-e15-tk.pbp.cs.ui.ac.id/get-wallet-flutter/${request.jsonData['wallet_pk']}');
     response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -350,7 +350,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   // Kirim ke Django dan tunggu respons
                   // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                   final response = await request.postJson(
-                      "http://10.0.2.2:8000/topup-wallet-flutter/${listWallet[0].pk}/",
+                      "https://libpanda-e15-tk.pbp.cs.ui.ac.id/topup-wallet-flutter/${listWallet[0].pk}",
                       jsonEncode(<String, String>{
                         'balance': amount.toString(),
 

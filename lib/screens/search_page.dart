@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/widgets/navbar.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class BookListPage extends StatefulWidget {
   @override
@@ -48,10 +50,20 @@ class _BookListPageState extends State<BookListPage> {
 
         break;
       case 5:
+
+        // if (true) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => ProfilePage()),
         );
+        // }
+        // else {
+        // Kalau LoginPage Sudah Dibuat Tolong Uncomment Code Ini dan Tolong Ubah <NamaLoginPage> menjadi Routing ke LoginPage-nya, makasih banyak <3
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => <NamaLoginPage>),
+        // );
+        // }
         break;
     }
   }

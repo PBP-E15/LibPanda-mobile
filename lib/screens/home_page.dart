@@ -7,6 +7,9 @@ import 'package:lib_panda/models/Book.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/screens/search_page.dart';
 import 'package:lib_panda/widgets/navbar.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -63,10 +66,20 @@ class _BookHomePageState extends State<BookHomePage> {
 
         break;
       case 5:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
-        );
+
+        // if (true) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+        // }
+        // else {
+          // Kalau LoginPage Sudah Dibuat Tolong Uncomment Code Ini dan Tolong Ubah <NamaLoginPage> menjadi Routing ke LoginPage-nya, makasih banyak <3
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => <NamaLoginPage>),
+          // );
+        // }
         break;
     }
   }
