@@ -13,6 +13,9 @@ class Navbar extends StatelessWidget {
     return
       Theme(data: ThemeData.dark(),
           child: BottomNavigationBar(
+            type: BottomNavigationBarType.shifting,
+            iconSize: 32,
+            selectedItemColor: Colors.white,
             currentIndex: currentIndex,
             onTap: onTap,
             items: [
@@ -23,6 +26,18 @@ class Navbar extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: Icon(Icons.library_books),
                 label: 'Library',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.library_add),
+                label: 'Request',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite),
+                label: 'Wishlist',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart),
+                label: 'Cart',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),

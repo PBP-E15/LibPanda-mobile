@@ -44,6 +44,9 @@ class _BookHomePageState extends State<BookHomePage> {
     });
 
     switch (index) {
+      case 0:
+
+        break;
       case 1:
         Navigator.pushReplacement(
           context,
@@ -51,6 +54,15 @@ class _BookHomePageState extends State<BookHomePage> {
         );
         break;
       case 2:
+
+        break;
+      case 3:
+
+        break;
+      case 4:
+
+        break;
+      case 5:
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => ProfilePage()),

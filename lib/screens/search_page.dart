@@ -35,7 +35,19 @@ class _BookListPageState extends State<BookListPage> {
           MaterialPageRoute(builder: (context) => BookHomePage()),
         );
         break;
+      case 1:
+
+        break;
       case 2:
+
+        break;
+      case 3:
+
+        break;
+      case 4:
+
+        break;
+      case 5:
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => ProfilePage()),

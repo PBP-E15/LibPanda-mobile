@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String? selectedGender = '';
   List<Biodata> listBiodata = <Biodata>[];
   List<Wallet> listWallet = <Wallet>[];
-  int _currentIndex = 2;
+  int _currentIndex = 5;
 
   void _onNavbarItemTapped(int index) {
     setState(() {
@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookHomePage()),
+          MaterialPageRoute(builder: (context) => BookListPage()),
         );
         break;
       case 1:
@@ -41,6 +41,18 @@ class _ProfilePageState extends State<ProfilePage> {
           context,
           MaterialPageRoute(builder: (context) => BookListPage()),
         );
+        break;
+      case 2:
+
+        break;
+      case 3:
+
+        break;
+      case 4:
+
+        break;
+      case 5:
+
         break;
     }
   }

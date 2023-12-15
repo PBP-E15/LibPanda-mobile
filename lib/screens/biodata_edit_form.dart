@@ -183,11 +183,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                         backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
                       ),
                       onPressed: () {
-                        // Navigator.of(context).pop();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfilePage()),
-                        );
+                        Navigator.of(context).pop();
                       },
                       child: Text('Cancel'),
                     ),
