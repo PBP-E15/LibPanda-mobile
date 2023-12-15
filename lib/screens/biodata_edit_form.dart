@@ -184,7 +184,10 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                       ),
                       onPressed: () {
                         // Navigator.of(context).pop();
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProfilePage()),
+                        );
                       },
                       child: Text('Cancel'),
                     ),
@@ -225,7 +228,10 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                                 .showSnackBar(const SnackBar(
                               content: Text("Edit Succesful!"),
                             ));
-                            Navigator.pop(context);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProfilePage()),
+                            );
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(

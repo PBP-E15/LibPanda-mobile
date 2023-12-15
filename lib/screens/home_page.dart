@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:lib_panda/models/Book.dart';
+import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/screens/search_page.dart';
+import 'package:lib_panda/widgets/navbar.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
 }
 // Book and other classes remain unchanged
 
+
 class BookHomePage extends StatefulWidget {
   @override
   _BookHomePageState createState() => _BookHomePageState();
@@ -33,6 +36,28 @@ class _BookHomePageState extends State<BookHomePage> {
   List<Book> listBookOriginal = <Book>[];
   bool isSearchVisible = false;
   String searchText = '';
+  int _currentIndex = 0;
+
+  void _onNavbarItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+
+    switch (index) {
+      case 1:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BookListPage()),
+        );
+        break;
+      case 2:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
+        break;
+    }
+  }
 
   @override
   void initState() {
@@ -121,6 +146,10 @@ class _BookHomePageState extends State<BookHomePage> {
             },
           ),
         ],
+      ),
+      bottomNavigationBar: Navbar(
+        currentIndex: _currentIndex,
+        onTap: _onNavbarItemTapped,
       ),
       body: Center(
         child: FutureBuilder<List<Book>>(

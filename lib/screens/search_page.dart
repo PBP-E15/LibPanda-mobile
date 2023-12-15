@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:lib_panda/models/Book.dart';
 import 'package:intl/intl.dart';
 import 'package:lib_panda/screens/home_page.dart';
+import 'package:lib_panda/screens/profile_page.dart';
+import 'package:lib_panda/widgets/navbar.dart';
 
 class BookListPage extends StatefulWidget {
   @override
@@ -19,6 +21,28 @@ class _BookListPageState extends State<BookListPage> {
   List<Book> listBook = <Book>[];
   List<Book> listBookOriginal = <Book>[];
   List<String> categories = <String>[];
+  int _currentIndex = 1;
+
+  void _onNavbarItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BookHomePage()),
+        );
+        break;
+      case 2:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
+        break;
+    }
+  }
 
   void sortBooks(List<Book> listBookParam,  String category, String name, bool checkPrice) {
     setState(() {
@@ -88,6 +112,7 @@ class _BookListPageState extends State<BookListPage> {
     if (listBookOriginal.length == 0) {
       listBook.length;
       listBook = list_book;
+      listBook.shuffle();
       listBookOriginal = list_book;
     }
 
@@ -98,13 +123,6 @@ class _BookListPageState extends State<BookListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => BookHomePage()));
-            },
-          ),
           title: Text('Library'),
           backgroundColor: Colors.grey[800],
           actions: [
@@ -145,6 +163,10 @@ class _BookListPageState extends State<BookListPage> {
             ),
           ],
         ),
+        bottomNavigationBar: Navbar(
+          currentIndex: _currentIndex,
+          onTap: _onNavbarItemTapped,
+        ),
         body: FutureBuilder(
             future: fetchBook(),
             builder: (context, AsyncSnapshot snapshot) {
@@ -163,87 +185,88 @@ class _BookListPageState extends State<BookListPage> {
                     ],
                   );
                 } else {
-                  return CustomScrollView(
-                    slivers: [
-                      SliverAppBar(
-                        backgroundColor: Colors.grey[900],
-                        pinned: true,
-                        flexibleSpace: FlexibleSpaceBar(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              DropdownButton<String>(
-                                value: selectedCategory,
-                                items: categories.map((String category) {
-                                  return DropdownMenuItem<String>(
-                                    value: category,
-                                    child: Text(
-                                      category,
-                                      style: TextStyle(
-                                        color: Colors.white, // Set text color to white
+                  return Theme(data: ThemeData.dark(),
+                      child: CustomScrollView(
+                        slivers: [
+                          SliverAppBar(
+                            backgroundColor: Colors.grey[900],
+                            pinned: true,
+                            flexibleSpace: FlexibleSpaceBar(
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  DropdownButton<String>(
+                                    value: selectedCategory,
+                                    items: categories.map((String category) {
+                                      return DropdownMenuItem<String>(
+                                        value: category,
+                                        child: Text(
+                                          category,
+                                          style: TextStyle(
+                                            color: Colors.white, // Set text color to white
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: (String? newValue) {
+                                      sortBooks(listBookOriginal, newValue!, searchText, false);
+                                    },
+                                  ),
+                                  SizedBox(width: 20),
+                                  InkWell(
+                                    onTap: () {
+                                      sortBooks(listBookOriginal, selectedCategory, searchText, true); },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Price',
+                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),),
+                                        Icon(sortPriceAscending ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                                  (BuildContext context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Card(
+                                    color: Colors.grey[800],
+                                    elevation: 5,
+                                    child: ListTile(
+                                      contentPadding: EdgeInsets.all(8),
+                                      leading: Container(
+                                        width: 80,
+                                        height: 80,
+                                        child: Image.network('${listBook[index].fields.thumbnail}'),
+                                      ),
+                                      title: Text("${listBook[index].fields.title}",
+                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+                                      subtitle: Column(
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .start,
+                                        children: [
+                                          SizedBox(height: 8),
+                                          Text('Category: ${listBook[index].fields.categories}',
+                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
+                                          SizedBox(height: 4),
+                                          Text('Price: ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listBook[index].fields.price)}',
+                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
+                                        ],
                                       ),
                                     ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  sortBooks(listBookOriginal, newValue!, searchText, false);
-                                },
-                              ),
-                              SizedBox(width: 20),
-                              InkWell(
-                                onTap: () {
-                                  sortBooks(listBookOriginal, selectedCategory, searchText, true); },
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Price',
-                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),),
-                                    Icon(sortPriceAscending ? Icons.arrow_drop_up : Icons.arrow_drop_down),
-                                  ],
-                                ),
-                              ),
-                            ],
+                                  ),
+                                );
+                              },
+                              childCount: listBook.length,
+                            ),
                           ),
-                        ),
-                      ),
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Card(
-                                color: Colors.grey[800],
-                                elevation: 5,
-                                child: ListTile(
-                                  contentPadding: EdgeInsets.all(8),
-                                  leading: Container(
-                                    width: 80,
-                                    height: 80,
-                                    child: Image.network('${listBook[index].fields.thumbnail}'),
-                                  ),
-                                  title: Text("${listBook[index].fields.title}",
-                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
-                                  subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      SizedBox(height: 8),
-                                      Text('Category: ${listBook[index].fields.categories}',
-                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
-                                      SizedBox(height: 4),
-                                      Text('Price: ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listBook[index].fields.price)}',
-                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          childCount: listBook.length,
-                        ),
-                      ),
-                    ],
-                  );
+                        ],
+                      ));
                 }
               }
             }));

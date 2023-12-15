@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
 
             scaffoldBackgroundColor: const Color(0xFF1E1E1E), // Dark grey color
 
-           
             textTheme: const TextTheme(
               titleLarge: TextStyle(
                 fontSize: 18.0,

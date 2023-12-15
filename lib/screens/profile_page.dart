@@ -1,13 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/biodata_edit_form.dart';
 import 'package:lib_panda/models/Biodata.dart';
 import 'package:lib_panda/screens/home_page.dart';
+import 'package:lib_panda/screens/search_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:lib_panda/models/Wallet.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
+import 'package:lib_panda/widgets/navbar.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -18,11 +22,41 @@ class _ProfilePageState extends State<ProfilePage> {
   String? selectedGender = '';
   List<Biodata> listBiodata = <Biodata>[];
   List<Wallet> listWallet = <Wallet>[];
+  int _currentIndex = 2;
+
+  void _onNavbarItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BookHomePage()),
+        );
+        break;
+      case 1:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BookListPage()),
+        );
+        break;
+    }
+  }
 
   Future<List<Biodata>> fetchBiodataAndWallet() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+
+    // TEMPORARY LOGIN SAJA
+    final request = context.watch<CookieRequest>();
+    final user = await request.login("http://10.0.2.2:8000/auth/login/", {
+      'username': "hilangharapan",
+      'password': "burungdara123",
+    });
+
     var url = Uri.parse(
-        'http://10.0.2.2:8000/get-biodata/1');
+        'http://10.0.2.2:8000/get-biodata-flutter/${request.jsonData['biodata_pk']}');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -35,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
 
     url = Uri.parse(
-        'http://10.0.2.2:8000/get-wallet/1');
+        'http://10.0.2.2:8000/get-wallet-flutter/${request.jsonData['wallet_pk']}');
     response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -54,13 +88,11 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile Page'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         backgroundColor: Colors.grey[800],
+      ),
+      bottomNavigationBar: Navbar(
+        currentIndex: _currentIndex,
+        onTap: _onNavbarItemTapped,
       ),
       body: FutureBuilder(
             future: fetchBiodataAndWallet(),
@@ -133,8 +165,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
                                         ),
                                         onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(builder: (context) => EditBiodataPage(biodata: listBiodata[0])));
+                                            Navigator.push(context,
+                                                MaterialPageRoute(builder: (context) => EditBiodataPage(biodata: listBiodata[0])));
                                         },
                                         child: Text('Edit Biodata'),
                                       ),
@@ -201,7 +233,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 }
               }
-        }));
+        })
+    );
   }
 
   Future<void> _showTopUpDialog(BuildContext context) async {
@@ -232,17 +265,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.white70,
                   ),),
                 SizedBox(height: 10),
-                TextField(
-                  controller: amountController,
-                  keyboardType: TextInputType.number,
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(labelText: 'Jumlah Saldo',
-                    labelStyle: TextStyle(
-                        color: Colors.white24,
-                    ),),
-                  onChanged: (value) {
-                    // You can perform additional validation here if needed
-                  },
+                Theme(
+                    data: ThemeData.dark(),
+                    child: TextField(
+                      controller: amountController,
+                      keyboardType: TextInputType.number,
+                      cursorColor: Colors.white,
+                      decoration: InputDecoration(labelText: 'Jumlah Saldo',
+                        labelStyle: TextStyle(
+                          color: Colors.white24,
+                        ),),
+                      onChanged: (value) {
+                        // You can perform additional validation here if needed
+                      },
+                    ),
                 ),
                 SizedBox(height: 20),
                 Align(
