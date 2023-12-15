@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:lib_panda/models/Book.dart';
+import 'book_details.dart';
+
 
 
 void main() {
@@ -146,44 +148,3 @@ class _BookHomePageState extends State<BookHomePage> {
   }
 }
 
-class BookDetailsPage extends StatelessWidget {
-  final Book book;
-
-  const BookDetailsPage({Key? key, required this.book}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(book.fields.title),
-        backgroundColor: Colors.grey[800],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(
-              book.fields.thumbnail,
-              errorBuilder: (context, error, stackTrace) {
-                return Placeholder(
-                  fallbackHeight: 100,
-                  fallbackWidth: 100,
-                );
-              },
-            ),
-            SizedBox(height: 20),
-            Text('Title: ${book.fields.title}'),
-            Text('Authors: ${book.fields.authors ?? "N/A"}'),
-            Text('Categories: ${book.fields.categories}'),
-            Text('Description: ${book.fields.description}'),
-            Text('Published Year: ${book.fields.publishedYear.toString()}'),
-            Text('Average Rating: ${book.fields.averageRating.toString()}'),
-            Text('Number of Pages: ${book.fields.numPages.toString()}'),
-            Text('Price: \$${book.fields.price.toString()}'),
-          ],
-        ),
-      ),
-    );
-  }
-}

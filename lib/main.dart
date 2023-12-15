@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/home_page.dart';
+import 'package:lib_panda/screens/menu_bar.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/screens/search_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          home: BookHomePage()),
+           home: CustomBottomNavigationBar()),
     );
   }
 }
