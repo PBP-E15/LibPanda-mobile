@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/home_page.dart';
-import 'package:lib_panda/screens/profile_page.dart';
-import 'package:lib_panda/screens/search_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+
+import 'package:lib_panda/screens/profile_page.dart';
+import 'package:lib_panda/screens/search_page.dart';
+import 'package:lib_panda/screens/home_page.dart';
+
 
 void main() {
   runApp(const MyApp());

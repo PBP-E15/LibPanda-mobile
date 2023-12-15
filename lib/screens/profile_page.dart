@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookListPage()),
+          MaterialPageRoute(builder: (context) => BookHomePage()),
         );
         break;
       case 1:
