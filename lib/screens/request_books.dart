@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_panda/screens/form_request_buku.dart';
+import 'package:lib_panda/screens/form_request_books.dart';
 import 'package:lib_panda/screens/list_requested_books.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/search_page.dart';
@@ -53,7 +53,8 @@ class _HomeRequestState extends State<HomeRequest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book Request App'),
+        title: Text('Request Books'),
+        backgroundColor: Colors.grey[800],
       ),
       bottomNavigationBar: Navbar(
         currentIndex: _currentIndex,
@@ -71,14 +72,14 @@ class _HomeRequestState extends State<HomeRequest> {
           return InkWell(
             onTap: () {
               if (index == 0) {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => RequestFormPage(),
                   ),
                 );
               } else if (index == 1) {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => RequestedListPage(itemList: itemList),
@@ -86,35 +87,36 @@ class _HomeRequestState extends State<HomeRequest> {
                 );
               }
             },
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[800], // Set background color
+            child: Card(
+              color: Colors.grey[800],
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    index == 0
-                        ? Icons.mode_edit_outlined
-                        : Icons.library_books_outlined,
-                    size: 48.0,
-                    color: Colors.white, // Set icon color to white
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    index == 0
-                        ? 'Request New Books Form'
-                        : 'Requested Books List',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.white, // Set text color to white
+              elevation: 3.0,
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      index == 0
+                          ? Icons.mode_edit_outlined
+                          : Icons.library_books_outlined,
+                      size: 48.0,
+                      color: Colors.white,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                    SizedBox(height: 8.0),
+                    Text(
+                      index == 0 ? 'Request New Books' : 'Requested Books List',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
             ),
           );

@@ -18,7 +18,7 @@ class _RequestFormPageState extends State<RequestFormPage> {
   final _formKey = GlobalKey<FormState>();
   late String _title;
   late String _author;
-  String? _category; // Make category nullable
+  String? _category;
   late int _year;
   int _currentIndex = 2;
 
@@ -72,18 +72,19 @@ class _RequestFormPageState extends State<RequestFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Form Tambah Item',
+            'Request New Books',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Colors.white, // Set text color to white
+              color: Colors.white,
             ),
           ),
         ),
+        backgroundColor: Colors.grey[800],
         foregroundColor: Colors.white,
         // leading: GestureDetector(
         //   onTap: () {
-        //     Navigator.pop(context); // Go back to the previous screen
+        //     Navigator.pop(context);
         //   },
         //   child: Icon(Icons.arrow_back),
         // ),
@@ -105,25 +106,19 @@ class _RequestFormPageState extends State<RequestFormPage> {
                   decoration: InputDecoration(
                     hintText: "Title",
                     labelText: "Title",
-                    hintStyle: TextStyle(
-                        color: Colors.white
-                            .withOpacity(0.5)), // Set hint text color
-                    labelStyle:
-                        TextStyle(color: Colors.white), // Set label text color
+                    hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                    labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide:
-                          BorderSide(color: Colors.white), // Set border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Colors.white), // Set focused border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Colors.white), // Set enabled border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -146,25 +141,19 @@ class _RequestFormPageState extends State<RequestFormPage> {
                   decoration: InputDecoration(
                     hintText: "Author",
                     labelText: "Author",
-                    hintStyle: TextStyle(
-                        color: Colors.white
-                            .withOpacity(0.5)), // Set hint text color
-                    labelStyle:
-                        TextStyle(color: Colors.white), // Set label text color
+                    hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                    labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide:
-                          BorderSide(color: Colors.white), // Set border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Colors.white), // Set focused border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Colors.white), // Set enabled border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -186,31 +175,36 @@ class _RequestFormPageState extends State<RequestFormPage> {
                   value: _category,
                   decoration: InputDecoration(
                     labelText: 'Category',
-                    hintStyle: TextStyle(
-                        color: Colors.white
-                            .withOpacity(0.5)), // Set hint text color
-                    labelStyle:
-                        TextStyle(color: Colors.white), // Set label text color
+                    hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                    labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide:
-                          BorderSide(color: Colors.white), // Set border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Colors.white), // Set focused border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Colors.white), // Set enabled border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
+                    filled: true, 
+                    fillColor: Colors.grey[800],
+                  ),
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.white, 
                   ),
                   items: _categories.map((String category) {
                     return DropdownMenuItem<String>(
                       value: category,
-                      child: Text(category),
+                      child: Text(
+                        category,
+                        style: TextStyle(
+                          color: _category == category ? Colors.white : null,
+                        ),
+                      ),
                     );
                   }).toList(),
                   onChanged: (String? value) {
@@ -233,25 +227,19 @@ class _RequestFormPageState extends State<RequestFormPage> {
                   decoration: InputDecoration(
                     hintText: "Year Published",
                     labelText: "Year Published",
-                    hintStyle: TextStyle(
-                        color: Colors.white
-                            .withOpacity(0.5)), // Set hint text color
-                    labelStyle:
-                        TextStyle(color: Colors.white), // Set label text color
+                    hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                    labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide:
-                          BorderSide(color: Colors.white), // Set border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Colors.white), // Set focused border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Colors.white), // Set enabled border color
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -275,7 +263,10 @@ class _RequestFormPageState extends State<RequestFormPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    style: ButtonStyle(),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.grey[800]),
+                    ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         RequestedBooks newItem = RequestedBooks(

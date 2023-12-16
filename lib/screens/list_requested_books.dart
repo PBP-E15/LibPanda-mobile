@@ -62,15 +62,10 @@ class _RequestedListPageState extends State<RequestedListPage> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
-            color: Colors.white, // Set text color to white
+            color: Colors.white,
           ),
         ),
-        // leading: GestureDetector(
-        //   onTap: () {
-        //     Navigator.pop(context); // Go back to the previous screen
-        //   },
-        //   child: Icon(Icons.arrow_back),
-        // ),
+        backgroundColor: Colors.grey[800],
       ),
       bottomNavigationBar: Navbar(
         currentIndex: _currentIndex,
@@ -82,9 +77,19 @@ class _RequestedListPageState extends State<RequestedListPage> {
           return Card(
             elevation: 5,
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            color: Colors.grey[800],
             child: ListTile(
-              title: Text(widget.itemList[index].title),
-              subtitle: Text('Author: ${widget.itemList[index].author}'),
+              title: Text(
+                widget.itemList[index].title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                'Author: ${widget.itemList[index].author}',
+                style: TextStyle(color: Colors.white),
+              ),
               onTap: () {
                 showDialog(
                   context: context,
@@ -106,7 +111,7 @@ class _RequestedListPageState extends State<RequestedListPage> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: const Text('Closed'),
+                          child: const Text('Close'),
                         ),
                       ],
                     );
