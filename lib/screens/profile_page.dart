@@ -63,8 +63,6 @@ class _ProfilePageState extends State<ProfilePage> {
     // TEMPORARY LOGIN SAJA
     final request = context.watch<CookieRequest>();
     final user = await request.login("http://10.0.2.2:8000/auth/login/", {
-      'username': "coba3",
-      'password': "libpanda123",
     });
 
     var url = Uri.parse(

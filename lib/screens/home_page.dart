@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:lib_panda/models/Book.dart';
+//import 'package:lib_panda/models/wishlist.dart';
 import 'package:lib_panda/screens/book_details.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/screens/search_page.dart';
+import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -61,7 +63,10 @@ class _BookHomePageState extends State<BookHomePage> {
 
         break;
       case 3:
-
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductPage()),
+        );
         break;
       case 4:
 
