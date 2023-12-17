@@ -224,10 +224,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                                 .showSnackBar(const SnackBar(
                               content: Text("Edit Succesful!"),
                             ));
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => ProfilePage()),
-                            );
+                            Navigator.of(context).pop();
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(

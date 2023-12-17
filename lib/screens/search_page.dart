@@ -69,6 +69,7 @@ class _BookListPageState extends State<BookListPage> {
   }
 
   void sortBooks(List<Book> listBookParam,  String category, String name, bool checkPrice) {
+
     setState(() {
       if (name.length == 0) {
         listBook = listBookOriginal;
