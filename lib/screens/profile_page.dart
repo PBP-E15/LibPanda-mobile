@@ -90,6 +90,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    if (!request.loggedIn) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => LoginPage()));
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile Page'),

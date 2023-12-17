@@ -50,20 +50,10 @@ class _BookListPageState extends State<BookListPage> {
 
         break;
       case 5:
-
-        // if (true) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => ProfilePage()),
         );
-        // }
-        // else {
-        // Kalau LoginPage Sudah Dibuat Tolong Uncomment Code Ini dan Tolong Ubah <NamaLoginPage> menjadi Routing ke LoginPage-nya, makasih banyak <3
-        // Navigator.pushReplacement(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => <NamaLoginPage>),
-        // );
-        // }
         break;
     }
   }
@@ -146,6 +136,7 @@ class _BookListPageState extends State<BookListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           title: Text('Library'),
