@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/biodata_edit_form.dart';
 import 'package:lib_panda/models/Biodata.dart';
