@@ -69,7 +69,7 @@ class BookDetailsPage extends StatelessWidget {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
                                       content:
-                                          Text("Terdapat kesalahan, silakan coba lagi."),
+                                          Text("Buku sudah ada di wishlist."),
                                   ));
                               }
                           },

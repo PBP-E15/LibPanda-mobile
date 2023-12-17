@@ -5,6 +5,7 @@ import 'package:lib_panda/screens/biodata_edit_form.dart';
 import 'package:lib_panda/models/Biodata.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/search_page.dart';
+import 'package:lib_panda/screens/wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -46,7 +47,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
         break;
       case 3:
-
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductPage()),
+        );
         break;
       case 4:
 

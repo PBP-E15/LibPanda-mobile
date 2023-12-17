@@ -63,7 +63,7 @@ class _BookHomePageState extends State<BookHomePage> {
 
         break;
       case 3:
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const ProductPage()),
         );

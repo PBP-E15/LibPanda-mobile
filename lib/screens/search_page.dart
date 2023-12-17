@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:lib_panda/screens/book_details.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/profile_page.dart';
+import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -39,13 +40,16 @@ class _BookListPageState extends State<BookListPage> {
         );
         break;
       case 1:
-
         break;
       case 2:
 
         break;
       case 3:
-
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductPage()),
+        );
+        // Tidak perlu navigasi karena Anda sudah berada di halaman ini
         break;
       case 4:
 
