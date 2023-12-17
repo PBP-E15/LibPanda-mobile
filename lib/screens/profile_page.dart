@@ -12,6 +12,7 @@ import 'package:lib_panda/models/Wallet.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:lib_panda/widgets/navbar.dart';
+import 'package:lib_panda/screens/login.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
