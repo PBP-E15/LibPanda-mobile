@@ -1,5 +1,4 @@
 import 'package:lib_panda/models/ShoppingCart.dart';
-import 'package:lib_panda/models/ShoppingCart.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
