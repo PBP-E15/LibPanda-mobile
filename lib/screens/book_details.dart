@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:lib_panda/models/Book.dart';
-import 'package:intl/intl.dart'; // Import the intl package
+import 'package:intl/intl.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart'; // Import the intl package
 // Import any additional dependencies or custom widgets you might use for a modern design
 class BookDetailsPage extends StatelessWidget {
   final Book book;
@@ -10,7 +14,7 @@ class BookDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formatCurrency = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
-
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: Text(book.fields.title),
@@ -46,8 +50,28 @@ class BookDetailsPage extends StatelessWidget {
                         color: Colors.grey[800], // Color of the circle
                         child: InkWell(
                           borderRadius: BorderRadius.circular(50.0),
-                          onTap: () {
+                          onTap: () async {
                             // Implement wishlist functionality
+                              // Kirim ke Django dan tunggu respons
+                              // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+                              final response = await request.postJson(
+                              "https://libpanda-e15-tk.pbp.cs.ui.ac.id/wishlist/add_wishlist_flutter/",
+                              jsonEncode(<String, String>{
+                                  'book_id': book.pk.toString(),
+                                  // TODO: Sesuaikan field data sesuai dengan aplikasimu
+                              }));
+                              if (response['status'] == 'Book added to wishlist successfully') {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                  content: Text("Book added to wishlist successfully"),
+                                  ));
+                              } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                      content:
+                                          Text("Buku sudah ada di wishlist."),
+                                  ));
+                              }
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),

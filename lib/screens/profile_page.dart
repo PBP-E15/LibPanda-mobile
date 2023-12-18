@@ -1,10 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/biodata_edit_form.dart';
 import 'package:lib_panda/models/Biodata.dart';
 import 'package:lib_panda/screens/home_page.dart';
+import 'package:lib_panda/screens/login.dart';
+import 'package:lib_panda/screens/request_books.dart';
 import 'package:lib_panda/screens/search_page.dart';
+import 'package:lib_panda/screens/wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -43,29 +44,37 @@ class _ProfilePageState extends State<ProfilePage> {
         );
         break;
       case 2:
-
+          Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeRequest()),
+        );
         break;
       case 3:
-
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductPage()),
+        );
         break;
       case 4:
 
         break;
       case 5:
-
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+      
         break;
     }
   }
 
   Future<List<Biodata>> fetchBiodataAndWallet() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-
-    // TEMPORARY LOGIN SAJA
     final request = context.watch<CookieRequest>();
-    final user = await request.login("http://10.0.2.2:8000/auth/login/", {
-      'username': "coba3",
-      'password': "libpanda123",
-    });
+    // await request.login("https://libpanda-e15-tk.pbp.cs.ui.ac.id/auth/login/", {
+    //   'username': 'coba8',
+    //   'password': 'libpanda123',
+    // });
 
     var url = Uri.parse(
         'https://libpanda-e15-tk.pbp.cs.ui.ac.id/get-biodata-flutter/${request.jsonData['biodata_pk']}');
@@ -97,6 +106,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    if (!request.loggedIn) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => LoginPage()));
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile Page'),
@@ -362,10 +376,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         .showSnackBar(const SnackBar(
                       content: Text("TopUp Successful!"),
                     ));
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()),
-                    );
+                    setState(() {
+                      Navigator.of(context).pop();
+                    });
                   } else {
                     ScaffoldMessenger.of(context)
                         .showSnackBar(const SnackBar(

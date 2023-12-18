@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:lib_panda/screens/book_details.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/profile_page.dart';
+import 'package:lib_panda/screens/request_books.dart';
+import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -39,32 +41,32 @@ class _BookListPageState extends State<BookListPage> {
         );
         break;
       case 1:
-
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BookListPage()),
+        );
         break;
       case 2:
-
+          Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeRequest()),
+        );
         break;
       case 3:
-
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductPage()),
+        );
         break;
       case 4:
 
         break;
       case 5:
-
-        // if (true) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
-        );
-        // }
-        // else {
-        // Kalau LoginPage Sudah Dibuat Tolong Uncomment Code Ini dan Tolong Ubah <NamaLoginPage> menjadi Routing ke LoginPage-nya, makasih banyak <3
-        // Navigator.pushReplacement(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => <NamaLoginPage>),
-        // );
-        // }
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+      
         break;
     }
   }
