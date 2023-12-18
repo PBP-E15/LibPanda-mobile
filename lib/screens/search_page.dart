@@ -7,6 +7,7 @@ import 'package:lib_panda/screens/book_details.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/screens/request_books.dart';
+import 'package:lib_panda/screens/shopping_cart.dart';
 import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -59,7 +60,10 @@ class _BookListPageState extends State<BookListPage> {
         );
         break;
       case 4:
-
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ShoppingCart()),
+          );
         break;
       case 5:
           Navigator.pushReplacement(

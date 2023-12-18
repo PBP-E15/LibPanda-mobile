@@ -21,7 +21,7 @@ class BookDetailsPage extends StatelessWidget {
         backgroundColor: Colors.grey[800],
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context); // Go back to the previous screen
+            Navigator.pop(context);
           },
           child: Icon(Icons.arrow_back),
         ),
@@ -38,10 +38,28 @@ class BookDetailsPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
                       book.fields.thumbnail,
-                      fit: BoxFit.none, // Do not resize, keep original size
+                      fit: BoxFit.none,
                     ),
                   ),
                   SizedBox(height: 20),
+                  Text(
+                    'Price:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    formatCurrency.format(book.fields.price ?? 0),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white,
+                      // Adjust styling as needed
+                    ),
+                  ),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -89,8 +107,25 @@ class BookDetailsPage extends StatelessWidget {
                         color: Colors.grey[800], // Color of the circle
                         child: InkWell(
                           borderRadius: BorderRadius.circular(50.0),
-                          onTap: () {
-                            // Implement shopping cart functionality
+                          onTap: () async {
+                            final response = await request.postJson(
+                              "https://libpanda-e15-tk.pbp.cs.ui.ac.id/shoppingcart/add_cart_flutter/",
+                              jsonEncode(<String, String>{
+                                'book_id': book.pk.toString(),
+                              }));
+                              if (response['status'] == 'Book added to shopping cart successfully') {
+                                ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                  content: 
+                                  Text("Book added to shopping cart successfully"),
+                                ));
+                              } else {
+                                  ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                    content:
+                                      Text("Book is already in the shopping cart"),
+                                  ));
+                              }
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
@@ -118,20 +153,6 @@ class BookDetailsPage extends StatelessWidget {
             ),
             Text(
               book.fields.title,
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Price:',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Colors.white,
-              ),
-            ),
-            Text(
-              // Format price using NumberFormat
-              formatCurrency.format(book.fields.price ?? 0),
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
             SizedBox(height: 10),

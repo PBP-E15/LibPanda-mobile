@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lib_panda/models/RequestedBooks.dart';
+import 'package:lib_panda/screens/shopping_cart.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/search_page.dart';
 import 'package:lib_panda/screens/request_books.dart';
+import 'package:lib_panda/screens/wishlist.dart';
+import 'package:lib_panda/screens/profile_page.dart';
 
 class RequestedListPage extends StatefulWidget {
   final List<RequestedBooks> itemList;
@@ -36,19 +39,29 @@ class _RequestedListPageState extends State<RequestedListPage> {
         );
         break;
       case 2:
-        Navigator.pushReplacement(
+          Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeRequest()),
         );
         break;
       case 3:
-        // Handle case 3
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductPage()),
+        );
         break;
       case 4:
-        // Handle case 4
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ShoppingCart()),
+          );
         break;
       case 5:
-        // Handle case 5
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+      
         break;
     }
   }
@@ -102,8 +115,7 @@ class _RequestedListPageState extends State<RequestedListPage> {
                         children: [
                           Text('Author: ${widget.itemList[index].author}'),
                           Text('Category: ${widget.itemList[index].category}'),
-                          Text(
-                              'Year Published: ${widget.itemList[index].year}'),
+                          Text('Year Published: ${widget.itemList[index].year}'),
                         ],
                       ),
                       actions: [

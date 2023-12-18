@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             //brightness: Brightness.light, // Use a light theme for a more modern feel
             primaryColor: Colors.indigo, // Update primary color
 
-            scaffoldBackgroundColor: Color.fromARGB(255, 188, 211, 227), // Dark grey color
+            scaffoldBackgroundColor: Color.fromARGB(255, 114, 114, 114), // Dark grey color
 
             textTheme: const TextTheme(
               titleLarge: TextStyle(

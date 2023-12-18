@@ -5,6 +5,7 @@ import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/login.dart';
 import 'package:lib_panda/screens/request_books.dart';
 import 'package:lib_panda/screens/search_page.dart';
+import 'package:lib_panda/screens/shopping_cart.dart';
 import 'package:lib_panda/screens/wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -56,7 +57,10 @@ class _ProfilePageState extends State<ProfilePage> {
         );
         break;
       case 4:
-
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ShoppingCart()),
+          );
         break;
       case 5:
           Navigator.pushReplacement(
@@ -68,6 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+ 
   Future<List<Biodata>> fetchBiodataAndWallet() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     final request = context.watch<CookieRequest>();
@@ -104,6 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return listBiodata;
   }
 
+
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -112,15 +118,51 @@ class _ProfilePageState extends State<ProfilePage> {
           MaterialPageRoute(builder: (context) => LoginPage()));
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile Page'),
-        backgroundColor: Colors.grey[800],
-      ),
-      bottomNavigationBar: Navbar(
-        currentIndex: _currentIndex,
-        onTap: _onNavbarItemTapped,
-      ),
-      body: FutureBuilder(
+        appBar: AppBar(
+          title: Text('Profile Page'),
+          backgroundColor: Colors.grey[800],
+          actions: [
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  request.logout("https://libpanda-e15-tk.pbp.cs.ui.ac.id/auth/logout/");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Logout successful!'),
+                      duration: Duration(seconds: 2), // Adjust the duration as needed
+                    ),
+                  );
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                });
+              },
+              child: Row(
+                children: [
+                  Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(width: 8,),
+                  Icon(
+                    Icons.logout,
+                    size: 28.0,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 5), // Add some spacing between icon and text
+                ],
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: Navbar(
+          currentIndex: _currentIndex,
+          onTap: _onNavbarItemTapped,
+        ),
+        body: FutureBuilder(
             future: fetchBiodataAndWallet(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
@@ -176,7 +218,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                   SizedBox(height: 8),
                                   Text('${listBiodata[0].fields.phoneNumber}',
-                                    style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(color: Colors.white)),
                                   SizedBox(height: 4),
                                   Text('${listBiodata[0].fields.email}',
                                       style: TextStyle(color: Colors.white)),
@@ -191,8 +233,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
                                         ),
                                         onPressed: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(builder: (context) => EditBiodataPage(biodata: listBiodata[0])));
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(builder: (context) => EditBiodataPage(biodata: listBiodata[0])));
                                         },
                                         child: Text('Edit Biodata'),
                                       ),
@@ -259,7 +301,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 }
               }
-        })
+            })
     );
   }
 
@@ -288,23 +330,23 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
                 Text('Masukkan jumlah saldo yang ingin di-top up:',
                   style: TextStyle(
-                      color: Colors.white70,
+                    color: Colors.white70,
                   ),),
                 SizedBox(height: 10),
                 Theme(
-                    data: ThemeData.dark(),
-                    child: TextField(
-                      controller: amountController,
-                      keyboardType: TextInputType.number,
-                      cursorColor: Colors.white,
-                      decoration: InputDecoration(labelText: 'Jumlah Saldo',
-                        labelStyle: TextStyle(
-                          color: Colors.white24,
-                        ),),
-                      onChanged: (value) {
-                        // You can perform additional validation here if needed
-                      },
-                    ),
+                  data: ThemeData.dark(),
+                  child: TextField(
+                    controller: amountController,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.white,
+                    decoration: InputDecoration(labelText: 'Jumlah Saldo',
+                      labelStyle: TextStyle(
+                        color: Colors.white24,
+                      ),),
+                    onChanged: (value) {
+                      // You can perform additional validation here if needed
+                    },
+                  ),
                 ),
                 SizedBox(height: 20),
                 Align(

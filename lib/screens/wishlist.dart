@@ -5,6 +5,7 @@ import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/screens/request_books.dart';
 import 'package:lib_panda/screens/search_page.dart';
+import 'package:lib_panda/screens/shopping_cart.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'dart:convert';
@@ -54,7 +55,10 @@ class _ProductPageState extends State<ProductPage> {
         );
         break;
       case 4:
-
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ShoppingCart()),
+          );
         break;
       case 5:
           Navigator.pushReplacement(
