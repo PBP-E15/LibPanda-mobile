@@ -44,8 +44,9 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.network(
-            'https://pictures.pibig.info/uploads/posts/2023-04/1680787841_pictures-pibig-info-p-trostnik-risunok-instagram-34.jpg',
+          Image.asset(
+            //'https://pictures.pibig.info/uploads/posts/2023-04/1680787841_pictures-pibig-info-p-trostnik-risunok-instagram-34.jpg',
+            'images/bglogin.jpg',
             fit: BoxFit.cover,
             color: Colors.black87,
             colorBlendMode: BlendMode.darken,
@@ -85,8 +86,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 12.0),
-                      Image.network(
-                        'https://i.ibb.co/brcxb2J/1698425247234.png',
+                      Image.asset(
+                        'images/logo_libpanda.png',
                         width: 200,
                         height: 200,
                       ),
