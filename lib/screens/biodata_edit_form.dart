@@ -70,7 +70,8 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
             },
           ),
         ),
@@ -183,7 +184,8 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                         backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => ProfilePage()));
                       },
                       child: Text('Cancel'),
                     ),
@@ -224,7 +226,8 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                                 .showSnackBar(const SnackBar(
                               content: Text("Edit Succesful!"),
                             ));
-                            Navigator.of(context).pop();
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) => ProfilePage()));
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
