@@ -152,7 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     size: 28.0,
                     color: Colors.white,
                   ),
-                  SizedBox(width: 5), // Add some spacing between icon and text
+                  SizedBox(width: 5),
                 ],
               ),
             ),
@@ -227,7 +227,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     alignment: Alignment.center,
                                     child: FractionallySizedBox(
                                       widthFactor: 1.0,
-                                      // Set to 1.0 to make it fill the available width
                                       child: ElevatedButton(
                                         style: ButtonStyle(
                                           backgroundColor:MaterialStateProperty.all<Color>(Colors.black45),
@@ -328,7 +327,7 @@ class _ProfilePageState extends State<ProfilePage> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Masukkan jumlah saldo yang ingin di-top up:',
+                Text('Enter the amount of balance you want to top up:',
                   style: TextStyle(
                     color: Colors.white70,
                   ),),
@@ -339,12 +338,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     controller: amountController,
                     keyboardType: TextInputType.number,
                     cursorColor: Colors.white,
-                    decoration: InputDecoration(labelText: 'Jumlah Saldo',
+                    decoration: InputDecoration(labelText: 'Balance Amount',
                       labelStyle: TextStyle(
                         color: Colors.white24,
                       ),),
                     onChanged: (value) {
-                      // You can perform additional validation here if needed
                     },
                   ),
                 ),
@@ -389,11 +387,9 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             TextButton(
               onPressed: () async {
-                // Validate the amount input
                 int? amount = int.tryParse(amountController.text);
 
                 if (amount == null || amount <= 0) {
-                  // Display an error message if the input is invalid
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Please enter a valid positive amount.'),

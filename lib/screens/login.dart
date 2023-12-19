@@ -41,10 +41,6 @@ class _LoginPageState extends State<LoginPage> {
     final request = context.watch<CookieRequest>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: Colors.grey[800],
-      ),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -99,9 +95,18 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _usernameController,
                         decoration: InputDecoration(
                           labelText: 'Username',
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green.shade800), // Border color when focused
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: Colors.green[50], // Fill color
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green.shade800), // Focused border color
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.green.shade800), // Hint color
+                          labelStyle: TextStyle(color: Colors.green.shade800),
                         ),
                       ),
                       const SizedBox(height: 12.0),
@@ -109,12 +114,22 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _passwordController,
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green.shade800), // Border color when focused
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: Colors.green[50], // Fill color
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green.shade800), // Focused border color
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.green.shade800), // Hint color
+                          labelStyle: TextStyle(color: Colors.green.shade800),
                         ),
                         obscureText: true,
                       ),
+
                       const SizedBox(height: 24.0),
                       ElevatedButton(
                         onPressed: () async {
@@ -140,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                               ScaffoldMessenger.of(context)
                                   ..hideCurrentSnackBar()
                                   ..showSnackBar(
-                                      SnackBar(content: Text("$message Selamat datang, $uname.")));
+                                      SnackBar(content: Text("$message Welcome, $uname.")));
                               } else {
                               showDialog(
                                   context: context,
@@ -161,24 +176,23 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.green.shade800, // Set the background color
-                          // You can also customize other button properties here, like padding and shape
-                          padding: EdgeInsets.symmetric(vertical: 15.0), // Adjust padding as needed
+                          primary: Colors.green.shade800, 
+                          padding: EdgeInsets.symmetric(vertical: 15.0), 
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0), // Adjust the border radius
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
                         child: const Text(
                           'Login',
                           style: TextStyle(
-                            color: Colors.white, // Text color set to white
+                            color: Colors.white, 
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       SizedBox(height: 20),
                       Text(
-                        'Don`t have an account yet?',
+                        "Don't have an account yet?",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 20),
@@ -187,10 +201,24 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RegistrationPage()),
+                              builder: (context) => const RegistrationPage(),
+                            ),
                           );
                         },
-                        child: const Text('Register'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 57, 160, 69),
+                          padding: const EdgeInsets.symmetric(vertical: 15.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ],
                   ),

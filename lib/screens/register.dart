@@ -155,7 +155,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       }
                     }
                   },
-                  child: const Text('Register'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 57, 160, 69),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0), // Increase horizontal padding
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  child: const Text(
+                    'Register',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),

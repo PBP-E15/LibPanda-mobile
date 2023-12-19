@@ -9,7 +9,6 @@ import 'dart:convert';
 class EditBiodataPage extends StatefulWidget {
   final Biodata biodata;
 
-  // Constructor to receive the parameter
   EditBiodataPage({required this.biodata});
 
   @override

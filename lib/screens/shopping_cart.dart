@@ -119,7 +119,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     child: ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (_, index) => Card(
-                        color: Colors.grey[200],
+                        color: Color.fromARGB(255, 255, 253, 208),
                         elevation: 5,
                         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         child: Padding(
@@ -172,8 +172,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
-                                            title: Text("Konfirmasi Penghapusan"),
-                                            content: Text("Apakah Anda yakin ingin menghapus buku ini dari shopping cart?"),
+                                            title: Text("Remove Confirmation"),
+                                            content: Text("Are you sure you want to remove this book from your shopping cart?"),
                                             actions: [
                                               TextButton(
                                                 onPressed: () {
@@ -216,6 +216,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         }
                                       }
                                     },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.green.shade800, 
+                                      padding: EdgeInsets.symmetric(vertical: 15.0),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                    ),
                                     child: Text("Delete"),
                                   ),
                                 ],
@@ -227,8 +234,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
                   ),
                   Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20), 
+                      color: Color.fromARGB(255, 255, 253, 208), 
+                    ),
                     padding: EdgeInsets.all(16),
-                    color: Colors.grey[200],
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Add margin for spacing
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -249,26 +260,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 4), 
                   ElevatedButton(
                     onPressed: () async {
                       bool buyConfirmed = await showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Konfirmasi Pembelian"),
-                            content: Text("Apakah Anda yakin ingin membeli semua buku dalam shopping cart?"),
+                            title: Text("Purchase Confirmation"),
+                            content: Text("Are you sure you want to purchase all the books in the shopping cart?"),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.pop(context, false);
                                 },
-                                child: Text("Batal"),
+                                child: Text("Cancel"),
                               ),
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.pop(context, true);
                                 },
-                                child: Text("Beli"),
+                                child: Text("Purchase"),
                               ),
                             ],
                           );
@@ -300,8 +312,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         }
                       }
                     },
-                    child: Text("Beli Sekarang"),
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color.fromARGB(255, 57, 160, 69), // Adjusted color
+                      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 40.0), // Increased padding to widen the button
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: Text(
+                      "Purchase Now!",
+                      style: TextStyle(
+                        fontSize: 16, // Adjust the font size if needed
+                        color: Colors.white, // Text color set to white
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
+                SizedBox(height: 8),
                 ],
               );
             }
