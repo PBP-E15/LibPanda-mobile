@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2023/12/15-18:39:05.512 f303 Reusing MANIFEST /private/var/folders/7r/d2zdw5ds0gzgnphfzblcv9rw0000gn/T/flutter_tools.VhPc6T/flutter_tools_chrome_device.c6BCTY/Default/shared_proto_db/metadata/MANIFEST-000001
 2023/12/15-18:39:05.512 f303 Recovering log #3
 2023/12/15-18:39:05.512 f303 Reusing old log /private/var/folders/7r/d2zdw5ds0gzgnphfzblcv9rw0000gn/T/flutter_tools.VhPc6T/flutter_tools_chrome_device.c6BCTY/Default/shared_proto_db/metadata/000003.log 
+=======
+2023/12/18-23:20:18.294 8bf4 Reusing MANIFEST C:\Users\Darryl\AppData\Local\Temp\flutter_tools.2e86e536\flutter_tools_chrome_device.9a92fb18\Default\shared_proto_db\metadata/MANIFEST-000001
+2023/12/18-23:20:18.295 8bf4 Recovering log #3
+2023/12/18-23:20:18.295 8bf4 Reusing old log C:\Users\Darryl\AppData\Local\Temp\flutter_tools.2e86e536\flutter_tools_chrome_device.9a92fb18\Default\shared_proto_db\metadata/000003.log 
+>>>>>>> cfb152b75076b518344d244e584623ccb8ec863f

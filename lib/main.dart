@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/home_page.dart';
+import 'package:lib_panda/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
             //brightness: Brightness.light, // Use a light theme for a more modern feel
             primaryColor: Colors.indigo, // Update primary color
 
-            scaffoldBackgroundColor: const Color(0xFF1E1E1E), // Dark grey color
+            scaffoldBackgroundColor: Color.fromARGB(255, 114, 114, 114), // Dark grey color
 
             textTheme: const TextTheme(
               titleLarge: TextStyle(
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          home: BookHomePage()),
+          home: LoginPage()),
     );
   }
 }

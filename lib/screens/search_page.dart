@@ -3,8 +3,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:lib_panda/models/Book.dart';
 import 'package:intl/intl.dart';
+import 'package:lib_panda/screens/book_details.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/profile_page.dart';
+import 'package:lib_panda/screens/request_books.dart';
+import 'package:lib_panda/screens/shopping_cart.dart';
+import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -38,28 +42,40 @@ class _BookListPageState extends State<BookListPage> {
         );
         break;
       case 1:
-
-        break;
-      case 2:
-
-        break;
-      case 3:
-
-        break;
-      case 4:
-
-        break;
-      case 5:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
+          MaterialPageRoute(builder: (context) => BookListPage()),
         );
+        break;
+      case 2:
+          Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeRequest()),
+        );
+        break;
+      case 3:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductPage()),
+        );
+        break;
+      case 4:
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ShoppingCart()),
+          );
+        break;
+      case 5:
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+      
         break;
     }
   }
 
   void sortBooks(List<Book> listBookParam,  String category, String name, bool checkPrice) {
-
     setState(() {
       if (name.length == 0) {
         listBook = listBookOriginal;
@@ -136,7 +152,6 @@ class _BookListPageState extends State<BookListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           title: Text('Library'),
@@ -247,9 +262,16 @@ class _BookListPageState extends State<BookListPage> {
                           ),
                           SliverList(
                             delegate: SliverChildBuilderDelegate(
-                                  (BuildContext context, int index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                              (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BookDetailsPage(book: listBook[index]),
+                                      ),
+                                    );
+                                  },
                                   child: Card(
                                     color: Colors.grey[800],
                                     elevation: 5,
@@ -260,18 +282,29 @@ class _BookListPageState extends State<BookListPage> {
                                         height: 80,
                                         child: Image.network('${listBook[index].fields.thumbnail}'),
                                       ),
-                                      title: Text("${listBook[index].fields.title}",
-                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+                                      title: Text(
+                                        "${listBook[index].fields.title}",
+                                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+                                      ),
                                       subtitle: Column(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(height: 8),
-                                          Text('Category: ${listBook[index].fields.categories}',
-                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
+                                          Text(
+                                            'Category: ${listBook[index].fields.categories}',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
                                           SizedBox(height: 4),
-                                          Text('Price: ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listBook[index].fields.price)}',
-                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
+                                          Text(
+                                            'Price: ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listBook[index].fields.price)}',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -281,6 +314,7 @@ class _BookListPageState extends State<BookListPage> {
                               childCount: listBook.length,
                             ),
                           ),
+
                         ],
                       ));
                 }

@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/biodata_edit_form.dart';
 import 'package:lib_panda/models/Biodata.dart';
 import 'package:lib_panda/screens/home_page.dart';
+import 'package:lib_panda/screens/login.dart';
+import 'package:lib_panda/screens/request_books.dart';
 import 'package:lib_panda/screens/search_page.dart';
+import 'package:lib_panda/screens/shopping_cart.dart';
+import 'package:lib_panda/screens/wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -10,7 +14,6 @@ import 'package:lib_panda/models/Wallet.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:lib_panda/widgets/navbar.dart';
-import 'package:lib_panda/screens/login.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -42,20 +45,34 @@ class _ProfilePageState extends State<ProfilePage> {
         );
         break;
       case 2:
-
+          Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeRequest()),
+        );
         break;
       case 3:
-
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductPage()),
+        );
         break;
       case 4:
-
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ShoppingCart()),
+          );
         break;
       case 5:
-
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+      
         break;
     }
   }
 
+ 
   Future<List<Biodata>> fetchBiodataAndWallet() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     final request = context.watch<CookieRequest>();
@@ -116,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   );
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => BookHomePage()));
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 });
               },
               child: Row(
