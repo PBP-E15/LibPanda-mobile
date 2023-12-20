@@ -9,6 +9,8 @@ import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 
 class HomeRequest extends StatefulWidget {
+  const HomeRequest({super.key});
+
   @override
   _HomeRequestState createState() => _HomeRequestState();
 }
@@ -25,19 +27,19 @@ class _HomeRequestState extends State<HomeRequest> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookHomePage()),
+          MaterialPageRoute(builder: (context) => const BookHomePage()),
         );
         break;
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookListPage()),
+          MaterialPageRoute(builder: (context) => const BookListPage()),
         );
         break;
       case 2:
           Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeRequest()),
+          MaterialPageRoute(builder: (context) => const HomeRequest()),
         );
         break;
       case 3:
@@ -49,13 +51,13 @@ class _HomeRequestState extends State<HomeRequest> {
       case 4:
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ShoppingCart()),
+            MaterialPageRoute(builder: (context) => const ShoppingCart()),
           );
         break;
       case 5:
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
+            MaterialPageRoute(builder: (context) => const ProfilePage()),
           );
       
         break;
@@ -65,7 +67,7 @@ class _HomeRequestState extends State<HomeRequest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Request Books'),
+        title: const Text('Request Books'),
         backgroundColor: Colors.green.shade800,
         foregroundColor: Colors.white,
       ),
@@ -83,8 +85,8 @@ class _HomeRequestState extends State<HomeRequest> {
             colorBlendMode: BlendMode.darken,
           ),
           GridView.builder(
-            padding: EdgeInsets.all(16.0),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            padding: const EdgeInsets.all(16.0),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16.0,
               mainAxisSpacing: 16.0,
@@ -97,7 +99,7 @@ class _HomeRequestState extends State<HomeRequest> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RequestFormPage(),
+                        builder: (context) => const RequestFormPage(),
                       ),
                     );
                   } else if (index == 1) {
@@ -116,7 +118,7 @@ class _HomeRequestState extends State<HomeRequest> {
                   ),
                   elevation: 3.0,
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -127,10 +129,10 @@ class _HomeRequestState extends State<HomeRequest> {
                           size: 48.0,
                           color: Colors.white,
                         ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         Text(
                           index == 0 ? 'Request New Books' : 'Requested Books List',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                             color: Colors.white,

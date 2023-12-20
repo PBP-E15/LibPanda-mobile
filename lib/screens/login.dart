@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lib_panda/main.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/register.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -150,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                               String uname = response['username'];
                               Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (context) => BookHomePage()),
+                                  MaterialPageRoute(builder: (context) => const BookHomePage()),
                               );
                               ScaffoldMessenger.of(context)
                                   ..hideCurrentSnackBar()
@@ -176,8 +175,8 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.green.shade800, 
-                          padding: EdgeInsets.symmetric(vertical: 15.0), 
+                          backgroundColor: Colors.green.shade800, 
+                          padding: const EdgeInsets.symmetric(vertical: 15.0), 
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
@@ -190,12 +189,12 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         "Don't have an account yet?",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -206,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 57, 160, 69),
+                          backgroundColor: const Color.fromARGB(255, 57, 160, 69),
                           padding: const EdgeInsets.symmetric(vertical: 15.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),

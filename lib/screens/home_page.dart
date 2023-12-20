@@ -12,18 +12,17 @@ import 'package:lib_panda/screens/search_page.dart';
 import 'package:lib_panda/screens/shopping_cart.dart';
 import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
-import 'package:provider/provider.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Book Viewer',
       
       home: BookHomePage(),
@@ -34,6 +33,8 @@ class MyApp extends StatelessWidget {
 
 
 class BookHomePage extends StatefulWidget {
+  const BookHomePage({super.key});
+
   @override
   _BookHomePageState createState() => _BookHomePageState();
 }
@@ -55,19 +56,19 @@ class _BookHomePageState extends State<BookHomePage> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookHomePage()),
+          MaterialPageRoute(builder: (context) => const BookHomePage()),
         );
         break;
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookListPage()),
+          MaterialPageRoute(builder: (context) => const BookListPage()),
         );
         break;
       case 2:
           Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeRequest()),
+          MaterialPageRoute(builder: (context) => const HomeRequest()),
         );
         break;
       case 3:
@@ -79,13 +80,13 @@ class _BookHomePageState extends State<BookHomePage> {
       case 4:
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ShoppingCart()),
+            MaterialPageRoute(builder: (context) => const ShoppingCart()),
           );
         break;
       case 5:
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
+            MaterialPageRoute(builder: (context) => const ProfilePage()),
           );
       
         break;
@@ -100,7 +101,7 @@ class _BookHomePageState extends State<BookHomePage> {
 
   void sortBooks(List<Book> listBookParam, String name) {
     setState(() {
-      if (name.length == 0) {
+      if (name.isEmpty) {
         listBook = listBookOriginal;
       }
       listBook = listBookParam
@@ -121,7 +122,7 @@ class _BookHomePageState extends State<BookHomePage> {
       List<dynamic> jsonResponse = json.decode(response.body);
       List<Book> books = jsonResponse.map((book) => Book.fromJson(book)).toList();
 
-      if (listBookOriginal.length == 0) {
+      if (listBookOriginal.isEmpty) {
         listBook.length;
         listBook = books;
         listBookOriginal = books;
@@ -140,7 +141,7 @@ class _BookHomePageState extends State<BookHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('LibPanda'),
+        title: const Text('LibPanda'),
         backgroundColor: Colors.green.shade800,
         foregroundColor: Colors.white,
         actions: [
@@ -158,19 +159,19 @@ class _BookHomePageState extends State<BookHomePage> {
                     sortBooks(listBookOriginal, searchText);
                   },
                   decoration: searchText.compareTo('') == 0
-                      ? InputDecoration(
+                      ? const InputDecoration(
                     hintText: 'Search by book name...',
                     hintStyle: TextStyle(color: Colors.white),
                   ) :
                   InputDecoration(
                     hintText: searchText,
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),
             ),
           IconButton(
-            icon: Icon(Icons.search,
+            icon: const Icon(Icons.search,
               size: 28.0,
               color: Colors.white,),
             onPressed: () {
@@ -201,12 +202,12 @@ class _BookHomePageState extends State<BookHomePage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 8.0,
                   mainAxisSpacing: 8.0,
                 ),
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 itemCount: listBook.length,
                 itemBuilder: (context, index) {
                 return Card(
@@ -238,7 +239,7 @@ class _BookHomePageState extends State<BookHomePage> {
                               child: Image.network(
                                 listBook[index].fields.thumbnail,
                                 errorBuilder: (context, error, stackTrace) {
-                                  return Placeholder(
+                                  return const Placeholder(
                                     fallbackHeight: 100,
                                     fallbackWidth: 100,
                                   );
@@ -249,7 +250,7 @@ class _BookHomePageState extends State<BookHomePage> {
                               ),
                             ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               listBook[index].fields.title,
                               textAlign: TextAlign.center,
@@ -271,7 +272,7 @@ class _BookHomePageState extends State<BookHomePage> {
                 child: Text('Error: ${snapshot.error}'),
               );
             }
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
             },

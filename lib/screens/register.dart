@@ -46,7 +46,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Card(
-                    color: Color.fromARGB(255, 255, 253, 208),
+                    color: const Color.fromARGB(255, 255, 253, 208),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Form(
@@ -155,7 +155,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => LoginPage()),
+                                            builder: (context) => const LoginPage()),
                                       );
                                     }
                                   } catch (e) {
@@ -169,7 +169,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Color.fromARGB(255, 57, 160, 69),
+                                backgroundColor: const Color.fromARGB(255, 57, 160, 69),
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20.0,
                                   vertical: 18.0,

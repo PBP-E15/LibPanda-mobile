@@ -4,7 +4,7 @@ class Navbar extends StatelessWidget {
   final int currentIndex;
   final Function(int) onTap;
 
-  Navbar({required this.currentIndex, required this.onTap});
+  const Navbar({super.key, required this.currentIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class Navbar extends StatelessWidget {
         unselectedItemColor: const Color.fromARGB(255, 165, 165, 165),
         currentIndex: currentIndex,
         onTap: onTap,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',

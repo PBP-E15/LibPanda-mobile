@@ -24,7 +24,7 @@ class BookDetailsPage extends StatelessWidget {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back),
+          child: const Icon(Icons.arrow_back),
         ),
       ),
       body: Stack(
@@ -49,7 +49,7 @@ class BookDetailsPage extends StatelessWidget {
                   child: Column(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                         child: SizedBox(
                           width: double.infinity,
                           height: 300, // Adjust the height of the image
@@ -63,7 +63,7 @@ class BookDetailsPage extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 16.0), // Adjust top padding
                         child: Column(
                           children: [
-                            Text(
+                            const Text(
                               'Price:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -71,10 +71,10 @@ class BookDetailsPage extends StatelessWidget {
                                 color: Colors.black87,
                               ),
                             ),
-                            SizedBox(height: 8), // Add space between price text and value
+                            const SizedBox(height: 8), // Add space between price text and value
                             Text(
                               formatCurrency.format(book.fields.price ?? 0),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 32, // Increase font size of price value
                                 color: Colors.black87,
@@ -86,12 +86,12 @@ class BookDetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Material(
-                      shape: CircleBorder(),
+                      shape: const CircleBorder(),
                       color: Colors.grey[800],
                       child: InkWell(
                         borderRadius: BorderRadius.circular(50.0),
@@ -118,19 +118,19 @@ class BookDetailsPage extends StatelessWidget {
                                   ));
                               }
                           },
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Icon(
                             Icons.favorite,
                             size: 40,
-                            color: const Color.fromARGB(255, 255, 90, 90),
+                            color: Color.fromARGB(255, 255, 90, 90),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 40),
+                    const SizedBox(width: 40),
                     Material(
-                      shape: CircleBorder(),
+                      shape: const CircleBorder(),
                       color: Colors.grey[800],
                       child: InkWell(
                         borderRadius: BorderRadius.circular(50.0),
@@ -154,8 +154,8 @@ class BookDetailsPage extends StatelessWidget {
                                   ));
                               }
                           },
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Icon(
                             Icons.shopping_cart,
                             size: 40,
@@ -166,7 +166,7 @@ class BookDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Card(
                   elevation: 8,
                   shape: RoundedRectangleBorder(
@@ -177,7 +177,7 @@ class BookDetailsPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Title:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -187,10 +187,10 @@ class BookDetailsPage extends StatelessWidget {
                         ),
                         Text(
                           book.fields.title,
-                          style: TextStyle(fontSize: 16, color: Colors.black87),
+                          style: const TextStyle(fontSize: 16, color: Colors.black87),
                         ),
-                         SizedBox(height: 10),
-                    Text(
+                         const SizedBox(height: 10),
+                    const Text(
                       'Authors:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -200,10 +200,10 @@ class BookDetailsPage extends StatelessWidget {
                     ),
                     Text(
                       book.fields.authors ?? 'N/A',
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                      style: const TextStyle(fontSize: 16, color: Colors.black87),
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       'Categories:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -213,10 +213,10 @@ class BookDetailsPage extends StatelessWidget {
                     ),
                     Text(
                       book.fields.categories,
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                      style: const TextStyle(fontSize: 16, color: Colors.black87),
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       'Description:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -226,30 +226,30 @@ class BookDetailsPage extends StatelessWidget {
                     ),
                     Text(
                       book.fields.description,
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                      style: const TextStyle(fontSize: 16, color: Colors.black87),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       'Published Year: ${book.fields.publishedYear ?? 'N/A'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       'Average Rating: ${book.fields.averageRating ?? 'N/A'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       'Number of Pages: ${book.fields.numPages ?? 'N/A'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                         color: Colors.black87,

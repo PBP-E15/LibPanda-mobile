@@ -10,10 +10,10 @@ import 'package:lib_panda/screens/request_books.dart';
 import 'package:lib_panda/screens/shopping_cart.dart';
 import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 
 class BookListPage extends StatefulWidget {
+  const BookListPage({super.key});
+
   @override
   _BookListPageState createState() => _BookListPageState();
 }
@@ -38,19 +38,19 @@ class _BookListPageState extends State<BookListPage> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookHomePage()),
+          MaterialPageRoute(builder: (context) => const BookHomePage()),
         );
         break;
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookListPage()),
+          MaterialPageRoute(builder: (context) => const BookListPage()),
         );
         break;
       case 2:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeRequest()),
+          MaterialPageRoute(builder: (context) => const HomeRequest()),
         );
         break;
       case 3:
@@ -62,19 +62,19 @@ class _BookListPageState extends State<BookListPage> {
       case 4:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ShoppingCart()),
+          MaterialPageRoute(builder: (context) => const ShoppingCart()),
         );
         break;
       case 5:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
         break;
     }
   }
 
-  void sortBooks(
+void sortBooks(
       List<Book> listBookParam, String category, String name, bool checkPrice) {
     setState(() {
       if (name.length == 0) {

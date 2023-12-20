@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 import 'package:lib_panda/models/Biodata.dart';
 import 'dart:convert';
 
 class EditBiodataPage extends StatefulWidget {
   final Biodata biodata;
 
-  EditBiodataPage({required this.biodata});
+  const EditBiodataPage({super.key, required this.biodata});
 
   @override
   _EditBiodataPageState createState() => _EditBiodataPageState();
@@ -65,14 +64,14 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
       child: Scaffold(
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
-          title: Text('Edit Biodata'),
+          title: const Text('Edit Biodata'),
           backgroundColor: Colors.green.shade800,
           foregroundColor: Colors.white,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+                  MaterialPageRoute(builder: (context) => const ProfilePage()));
             },
           ),
         ),
@@ -84,7 +83,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
               children: <Widget>[
                 TextFormField(
                   controller: nameController,
-                  decoration: InputDecoration(labelText: 'Name'),
+                  decoration: const InputDecoration(labelText: 'Name'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Name is required';
@@ -94,7 +93,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                 ),
                 TextFormField(
                   controller: emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
+                  decoration: const InputDecoration(labelText: 'Email'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Email is required';
@@ -105,8 +104,8 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                   },
                 ),
                 ListTile(
-                  title: Text('Gender'),
-                  contentPadding: EdgeInsets.all(0),
+                  title: const Text('Gender'),
+                  contentPadding: const EdgeInsets.all(0),
                   subtitle: Row(
                     children: [
                       Radio(
@@ -118,7 +117,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                           });
                         },
                       ),
-                      Text('Male'),
+                      const Text('Male'),
                       Radio(
                         value: 'female',
                         groupValue: genderController.text,
@@ -128,7 +127,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                           });
                         },
                       ),
-                      Text('Female'),
+                      const Text('Female'),
                     ],
                   ),
                 ),
@@ -138,7 +137,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                   decoration: InputDecoration(
                     labelText: 'Birthday',
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.calendar_today),
+                      icon: const Icon(Icons.calendar_today),
                       onPressed: () async {
                         // Show date picker and wait for user to pick a date
                         DateTime? pickedDate = await showDatePicker(
@@ -166,7 +165,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                 ),
                 TextFormField(
                   controller: phoneNumberController,
-                  decoration: InputDecoration(labelText: 'Phone Number'),
+                  decoration: const InputDecoration(labelText: 'Phone Number'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Phone Number is required';
@@ -176,7 +175,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -186,9 +185,9 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                       ),
                       onPressed: () {
                         Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => ProfilePage()));
+                            MaterialPageRoute(builder: (context) => const ProfilePage()));
                       },
-                      child: Text('Cancel'),
+                      child: const Text('Cancel'),
                     ),
                     ElevatedButton(
                       style: ButtonStyle(
@@ -228,7 +227,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                               content: Text("Edit Succesful!"),
                             ));
                             Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (context) => ProfilePage()));
+                                MaterialPageRoute(builder: (context) => const ProfilePage()));
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
@@ -238,7 +237,7 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                           }
                         }
                       },
-                      child: Text('Save'),
+                      child: const Text('Save'),
                     ),
                   ],
                 ),

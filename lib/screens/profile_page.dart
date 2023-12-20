@@ -16,6 +16,8 @@ import 'package:intl/intl.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -35,19 +37,19 @@ class _ProfilePageState extends State<ProfilePage> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookHomePage()),
+          MaterialPageRoute(builder: (context) => const BookHomePage()),
         );
         break;
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookListPage()),
+          MaterialPageRoute(builder: (context) => const BookListPage()),
         );
         break;
       case 2:
           Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeRequest()),
+          MaterialPageRoute(builder: (context) => const HomeRequest()),
         );
         break;
       case 3:
@@ -59,13 +61,13 @@ class _ProfilePageState extends State<ProfilePage> {
       case 4:
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ShoppingCart()),
+            MaterialPageRoute(builder: (context) => const ShoppingCart()),
           );
         break;
       case 5:
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
+            MaterialPageRoute(builder: (context) => const ProfilePage()),
           );
       
         break;
@@ -115,11 +117,11 @@ class _ProfilePageState extends State<ProfilePage> {
     final request = context.watch<CookieRequest>();
     if (!request.loggedIn) {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => LoginPage()));
+          MaterialPageRoute(builder: (context) => const LoginPage()));
     }
     return Scaffold(
         appBar: AppBar(
-          title: Text('Profile Page'),
+          title: const Text('Profile Page'),
           backgroundColor: Colors.green.shade800,
           foregroundColor: Colors.white,
           actions: [
@@ -128,16 +130,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 setState(() {
                   request.logout("https://libpanda-e15-tk.pbp.cs.ui.ac.id/auth/logout/");
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Logout successful!'),
                       duration: Duration(seconds: 2), // Adjust the duration as needed
                     ),
                   );
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
+                      MaterialPageRoute(builder: (context) => const LoginPage()));
                 });
               },
-              child: Row(
+              child: const Row(
                 children: [
                   Text(
                     'Logout',
@@ -192,12 +194,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 } else {
                   return Center(
                     child: Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Row(
+                          const Row(
                             children: [
                               Icon(
                                 Icons.person,
@@ -212,27 +214,27 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Card(
                             color: Colors.grey[800],
                             elevation: 5,
                             child: Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    '${listBiodata[0].fields.name}',
-                                    style: TextStyle(fontSize: 16,
+                                    listBiodata[0].fields.name,
+                                    style: const TextStyle(fontSize: 16,
                                         fontWeight: FontWeight.bold, color: Colors.white),
                                   ),
-                                  SizedBox(height: 8),
-                                  Text('${listBiodata[0].fields.phoneNumber}',
-                                      style: TextStyle(color: Colors.white)),
-                                  SizedBox(height: 4),
-                                  Text('${listBiodata[0].fields.email}',
-                                      style: TextStyle(color: Colors.white)),
-                                  SizedBox(height: 8),
+                                  const SizedBox(height: 8),
+                                  Text(listBiodata[0].fields.phoneNumber,
+                                      style: const TextStyle(color: Colors.white)),
+                                  const SizedBox(height: 4),
+                                  Text(listBiodata[0].fields.email,
+                                      style: const TextStyle(color: Colors.white)),
+                                  const SizedBox(height: 8),
                                   Align(
                                     alignment: Alignment.center,
                                     child: FractionallySizedBox(
@@ -245,7 +247,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           Navigator.pushReplacement(context,
                                               MaterialPageRoute(builder: (context) => EditBiodataPage(biodata: listBiodata[0])));
                                         },
-                                        child: Text('Edit Biodata'),
+                                        child: const Text('Edit Biodata'),
                                       ),
                                     ),
                                   ),
@@ -253,8 +255,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 40),
-                          Row(
+                          const SizedBox(height: 40),
+                          const Row(
                             children: [
                               Icon(
                                 Icons.account_balance_wallet,
@@ -269,20 +271,20 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Card(
                             color: Colors.grey[800],
                             elevation: 5,
                             child: Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 children: <Widget>[
                                   Text(
-                                    '${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listWallet[0].fields.balance)}',
-                                    style: TextStyle(fontSize: 28,
+                                    NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(listWallet[0].fields.balance),
+                                    style: const TextStyle(fontSize: 28,
                                         fontWeight: FontWeight.bold, color: Colors.white),
                                   ),
-                                  SizedBox(height: 8),
+                                  const SizedBox(height: 8),
                                   Align(
                                     alignment: Alignment.center,
                                     child: FractionallySizedBox(
@@ -296,7 +298,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           // Contoh: Menampilkan dialog untuk top-up saldo
                                           _showTopUpDialog(context);
                                         },
-                                        child: Text('Top-Up Wallet'),
+                                        child: const Text('Top-Up Wallet'),
                                       ),
                                     ),
                                   ),
@@ -333,25 +335,25 @@ class _ProfilePageState extends State<ProfilePage> {
         final request = context.watch<CookieRequest>();
         return AlertDialog(
           backgroundColor: Colors.grey[900],
-          title: Text(
+          title: const Text(
             'Top-Up Wallet',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white),
           ),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Enter the amount of balance you want to top up:',
+                const Text('Enter the amount of balance you want to top up:',
                   style: TextStyle(
                     color: Colors.white70,
                   ),),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Theme(
                   data: ThemeData.dark(),
                   child: TextField(
                     controller: amountController,
                     keyboardType: TextInputType.number,
                     cursorColor: Colors.white,
-                    decoration: InputDecoration(labelText: 'Balance Amount',
+                    decoration: const InputDecoration(labelText: 'Balance Amount',
                       labelStyle: TextStyle(
                         color: Colors.white24,
                       ),),
@@ -359,18 +361,18 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
-                Align(
+                const SizedBox(height: 20),
+                const Align(
                   alignment: Alignment.center,
                   child: Text(
                     'Payment Method',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Align(
                   alignment: Alignment.center,
-                  child: new Theme(
+                  child: Theme(
                     data: ThemeData.dark(),
                     child: FractionallySizedBox(
                       widthFactor: 0.5,
@@ -396,7 +398,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Batal'),
+              child: const Text('Batal'),
             ),
             TextButton(
               onPressed: () async {
@@ -404,7 +406,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 if (amount == null || amount <= 0) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Please enter a valid positive amount.'),
                       backgroundColor: Colors.red,
                     ),
@@ -439,7 +441,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                 }
               },
-              child: Text('Top-Up'),
+              child: const Text('Top-Up'),
             ),
           ],
         );

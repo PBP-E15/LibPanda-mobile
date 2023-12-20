@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
-import 'package:lib_panda/screens/profile_page.dart';
-import 'package:lib_panda/screens/search_page.dart';
-import 'package:lib_panda/screens/home_page.dart';
 
 
 void main() {
@@ -29,7 +25,7 @@ class MyApp extends StatelessWidget {
             //brightness: Brightness.light, // Use a light theme for a more modern feel
             primaryColor: Colors.indigo, // Update primary color
 
-            scaffoldBackgroundColor: Color.fromARGB(255, 114, 114, 114), // Dark grey color
+            scaffoldBackgroundColor: const Color.fromARGB(255, 114, 114, 114), // Dark grey color
 
             textTheme: const TextTheme(
               titleLarge: TextStyle(
@@ -43,7 +39,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          home: LoginPage()),
+          home: const LoginPage()),
     );
   }
 }

@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lib_panda/models/RequestedBooks.dart';
-import 'package:lib_panda/screens/shopping_cart.dart';
-import 'package:lib_panda/widgets/navbar.dart';
-import 'package:lib_panda/screens/home_page.dart';
-import 'package:lib_panda/screens/search_page.dart';
-import 'package:lib_panda/screens/request_books.dart';
-import 'package:lib_panda/screens/wishlist.dart';
-import 'package:lib_panda/screens/profile_page.dart';
 
 class RequestedListPage extends StatefulWidget {
   final List<RequestedBooks> itemList;
@@ -23,7 +16,7 @@ class _RequestedListPageState extends State<RequestedListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Requested Books',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -53,14 +46,14 @@ class _RequestedListPageState extends State<RequestedListPage> {
                 child: ListTile(
                   title: Text(
                     widget.itemList[index].title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   subtitle: Text(
                     'Author: ${widget.itemList[index].author}',
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   onTap: () {
                     showDialog(

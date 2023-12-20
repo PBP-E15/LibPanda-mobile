@@ -31,37 +31,37 @@ class _ShoppingCartState extends State<ShoppingCart> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  BookHomePage()),
+          MaterialPageRoute(builder: (context) =>  const BookHomePage()),
         );
         break;
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  BookListPage()),
+          MaterialPageRoute(builder: (context) =>  const BookListPage()),
         );
         break;
       case 2:
           Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  HomeRequest()),
+          MaterialPageRoute(builder: (context) =>  const HomeRequest()),
         );
         break;
       case 3:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  ProductPage()),
+          MaterialPageRoute(builder: (context) =>  const ProductPage()),
         );
         break;
       case 4:
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ShoppingCart()),
+            MaterialPageRoute(builder: (context) => const ShoppingCart()),
           );
         break;
       case 5:
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
+            MaterialPageRoute(builder: (context) => const ProfilePage()),
           );
       
         break;
@@ -222,7 +222,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         borderRadius: BorderRadius.circular(10.0),
                                       ),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       "Delete",
                                       style: TextStyle(color: Colors.white),
                                     ),

@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lib_panda/models/RequestedBooks.dart';
-import 'package:lib_panda/screens/shopping_cart.dart';
-import 'package:lib_panda/widgets/navbar.dart';
-import 'package:lib_panda/screens/home_page.dart';
-import 'package:lib_panda/screens/search_page.dart';
-import 'package:lib_panda/screens/request_books.dart';
-import 'package:lib_panda/screens/wishlist.dart';
-import 'package:lib_panda/screens/profile_page.dart';
 
 List<RequestedBooks> itemList = [];
 
@@ -24,7 +17,7 @@ class _RequestFormPageState extends State<RequestFormPage> {
   String? _category;
   late int _year;
 
-  List<String> _categories = [
+  final List<String> _categories = [
     'Fiction',
     'History',
     'Cooking',
@@ -65,23 +58,23 @@ class _RequestFormPageState extends State<RequestFormPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: "Title",
                     labelText: "Title",
                     hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -100,23 +93,23 @@ class _RequestFormPageState extends State<RequestFormPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: "Author",
                     labelText: "Author",
                     hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -139,23 +132,23 @@ class _RequestFormPageState extends State<RequestFormPage> {
                   decoration: InputDecoration(
                     labelText: 'Category',
                     hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     filled: true, 
                     fillColor: Colors.grey[800],
                   ),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_drop_down,
                     color: Colors.white, 
                   ),
@@ -186,23 +179,23 @@ class _RequestFormPageState extends State<RequestFormPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: "Year Published",
                     labelText: "Year Published",
                     hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                   ),
                   onChanged: (String? value) {
