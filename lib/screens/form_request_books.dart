@@ -23,7 +23,6 @@ class _RequestFormPageState extends State<RequestFormPage> {
   late String _author;
   String? _category;
   late int _year;
-  int _currentIndex = 2;
 
   List<String> _categories = [
     'Fiction',
@@ -32,52 +31,6 @@ class _RequestFormPageState extends State<RequestFormPage> {
     'Graphic Novels',
     'Philosophy'
   ];
-
-  void _onNavbarItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => BookHomePage()),
-        );
-        break;
-      case 1:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => BookListPage()),
-        );
-        break;
-      case 2:
-          Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeRequest()),
-        );
-        break;
-      case 3:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const ProductPage()),
-        );
-        break;
-      case 4:
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => ShoppingCart()),
-          );
-        break;
-      case 5:
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
-          );
-      
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +46,7 @@ class _RequestFormPageState extends State<RequestFormPage> {
             ),
           ),
         ),
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.green.shade800,
         foregroundColor: Colors.white,
         // leading: GestureDetector(
         //   onTap: () {
@@ -102,10 +55,7 @@ class _RequestFormPageState extends State<RequestFormPage> {
         //   child: Icon(Icons.arrow_back),
         // ),
       ),
-      bottomNavigationBar: Navbar(
-        currentIndex: _currentIndex,
-        onTap: _onNavbarItemTapped,
-      ),
+      
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(

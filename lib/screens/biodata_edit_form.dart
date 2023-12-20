@@ -66,6 +66,8 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
           title: Text('Edit Biodata'),
+          backgroundColor: Colors.green.shade800,
+          foregroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {

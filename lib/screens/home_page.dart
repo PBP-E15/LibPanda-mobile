@@ -141,7 +141,8 @@ class _BookHomePageState extends State<BookHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('LibPanda'),
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.green.shade800,
+        foregroundColor: Colors.white,
         actions: [
           if (isSearchVisible)
             Flexible(
@@ -184,7 +185,17 @@ class _BookHomePageState extends State<BookHomePage> {
         currentIndex: _currentIndex,
         onTap: _onNavbarItemTapped,
       ),
-      body: Center(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Background image
+          Image.asset(
+            'images/bglogin.jpg',
+            fit: BoxFit.cover,
+            color: Colors.black87,
+            colorBlendMode: BlendMode.darken,
+          ),
+          Center(
         child: FutureBuilder<List<Book>>(
           future: futureBooks,
           builder: (context, snapshot) {
@@ -263,8 +274,10 @@ class _BookHomePageState extends State<BookHomePage> {
             return Center(
               child: CircularProgressIndicator(),
             );
-          },
-        ),
+            },
+            ),
+          ),
+        ],
       ),
     );
   }

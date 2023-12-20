@@ -120,7 +120,8 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Profile Page'),
-          backgroundColor: Colors.grey[800],
+          backgroundColor: Colors.green.shade800,
+          foregroundColor: Colors.white,
           actions: [
             GestureDetector(
               onTap: () {
@@ -162,7 +163,16 @@ class _ProfilePageState extends State<ProfilePage> {
           currentIndex: _currentIndex,
           onTap: _onNavbarItemTapped,
         ),
-        body: FutureBuilder(
+        body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'images/bglogin.jpg', // Replace with your image path
+            fit: BoxFit.cover,
+            color: Colors.black87,
+            colorBlendMode: BlendMode.darken,
+          ),
+          FutureBuilder(
             future: fetchBiodataAndWallet(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
@@ -294,15 +304,18 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                         ],
                     ),
-                  );
-                }
+                  ),
+                );
               }
-            })
-    );
-  }
+            }
+          },
+        ),
+      ],
+    ),
+  );
+}
 
   Future<void> _showTopUpDialog(BuildContext context) async {
     // List of available payment methods

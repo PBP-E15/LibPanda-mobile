@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 import 'package:lib_panda/models/ShoppingCart.dart';
-import 'package:lib_panda/screens/book_details.dart';
 import 'package:lib_panda/screens/home_page.dart';
 import 'package:lib_panda/screens/profile_page.dart';
 import 'package:lib_panda/screens/request_books.dart';
@@ -9,7 +8,6 @@ import 'package:lib_panda/screens/wishlist.dart';
 import 'package:lib_panda/widgets/navbar.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:lib_panda/models/Book.dart' as Bookdetails;
 import 'package:provider/provider.dart';
@@ -33,31 +31,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookHomePage()),
+          MaterialPageRoute(builder: (context) =>  BookHomePage()),
         );
         break;
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => BookListPage()),
+          MaterialPageRoute(builder: (context) =>  BookListPage()),
         );
         break;
       case 2:
           Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeRequest()),
+          MaterialPageRoute(builder: (context) =>  HomeRequest()),
         );
         break;
       case 3:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const ProductPage()),
+          MaterialPageRoute(builder: (context) =>  ProductPage()),
         );
         break;
       case 4:
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const ShoppingCart()),
+            MaterialPageRoute(builder: (context) => ShoppingCart()),
           );
         break;
       case 5:
@@ -72,15 +70,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
     
   Future<List<Cart>> fetchProduct(request) async {
       var response = await request.get('https://libpanda-e15-tk.pbp.cs.ui.ac.id/shoppingcart/json/');
-      final Cart cart;
+      //final Cart cart;
 
-      List<Cart> list_cart = [];
+      List<Cart> listCart = [];
       for (var d in response) {
           if (d != null) {
-              list_cart.add(Cart.fromJson(d));
+              listCart.add(Cart.fromJson(d));
           }
       }
-      return list_cart;
+      return listCart;
   }
 
   @override
@@ -90,7 +88,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Shopping Cart'),
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.green.shade800,
+        foregroundColor: Colors.white,
       ),
       body: FutureBuilder(
         future: fetchProduct(request),
@@ -119,7 +118,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     child: ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (_, index) => Card(
-                        color: Color.fromARGB(255, 255, 253, 208),
+                        color: const Color.fromARGB(255, 255, 253, 208),
                         elevation: 5,
                         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         child: Padding(
@@ -141,7 +140,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           width: 100,
                                           height: 150,
                                           color: Colors.grey,
-                                          child: Center(
+                                          child: const Center(
                                             child: Icon(Icons.error),
                                           ),
                                         );
@@ -172,20 +171,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
-                                            title: Text("Remove Confirmation"),
-                                            content: Text("Are you sure you want to remove this book from your shopping cart?"),
+                                            title: const Text("Remove Confirmation"),
+                                            content: const Text("Are you sure you want to remove this book from your shopping cart?"),
                                             actions: [
                                               TextButton(
                                                 onPressed: () {
                                                   Navigator.pop(context, false);
                                                 },
-                                                child: Text("Batal"),
+                                                child: const Text("Batal"),
                                               ),
                                               ElevatedButton(
                                                 onPressed: () {
                                                   Navigator.pop(context, true);
                                                 },
-                                                child: Text("Delete"),
+                                                child: const Text("Delete"),
                                               ),
                                             ],
                                           );
@@ -217,13 +216,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      primary: Colors.green.shade800, 
-                                      padding: EdgeInsets.symmetric(vertical: 15.0),
+                                      backgroundColor: Colors.green.shade800, 
+                                      padding: const EdgeInsets.symmetric(vertical: 15.0),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10.0),
                                       ),
                                     ),
-                                    child: Text("Delete"),
+                                    child: Text(
+                                      "Delete",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -236,14 +238,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20), 
-                      color: Color.fromARGB(255, 255, 253, 208), 
+                      color: const Color.fromARGB(255, 255, 253, 208), 
                     ),
-                    padding: EdgeInsets.all(16),
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Add margin for spacing
+                    padding: const EdgeInsets.all(16),
+                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Add margin for spacing
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Total Price:",
                           style: TextStyle(
                             fontSize: 18.0,
@@ -251,8 +253,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
                         ),
                         Text(
-                          "${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(totalPrice)}",
-                          style: TextStyle(
+                          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(totalPrice),
+                          style: const TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -260,27 +262,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 4), 
+                  const SizedBox(height: 4), 
                   ElevatedButton(
                     onPressed: () async {
                       bool buyConfirmed = await showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Purchase Confirmation"),
-                            content: Text("Are you sure you want to purchase all the books in the shopping cart?"),
+                            title: const Text("Purchase Confirmation"),
+                            content: const Text("Are you sure you want to purchase all the books in the shopping cart?"),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.pop(context, false);
                                 },
-                                child: Text("Cancel"),
+                                child: const Text("Cancel"),
                               ),
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.pop(context, true);
                                 },
-                                child: Text("Purchase"),
+                                child: const Text("Purchase"),
                               ),
                             ],
                           );
@@ -313,13 +315,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 57, 160, 69), // Adjusted color
-                      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 40.0), // Increased padding to widen the button
+                      backgroundColor: const Color.fromARGB(255, 57, 160, 69), // Adjusted color
+                      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 40.0), // Increased padding to widen the button
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Purchase Now!",
                       style: TextStyle(
                         fontSize: 16, // Adjust the font size if needed
@@ -328,7 +330,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),
                     ),
                   ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 ],
               );
             }

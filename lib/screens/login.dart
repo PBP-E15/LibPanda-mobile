@@ -45,7 +45,6 @@ class _LoginPageState extends State<LoginPage> {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            //'https://pictures.pibig.info/uploads/posts/2023-04/1680787841_pictures-pibig-info-p-trostnik-risunok-instagram-34.jpg',
             'images/bglogin.jpg',
             fit: BoxFit.cover,
             color: Colors.black87,

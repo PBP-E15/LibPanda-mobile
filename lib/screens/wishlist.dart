@@ -98,7 +98,8 @@ Future<List<Wishlist>> fetchProduct(request) async {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wishlist'),
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.green.shade800,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
@@ -260,7 +261,10 @@ Future<List<Wishlist>> fetchProduct(request) async {
                                         borderRadius: BorderRadius.circular(10.0),
                                       ),
                                     ),
-                                    child: Text("Delete"),
+                                    child: Text(
+                                      "Delete",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 ],
                               ),
