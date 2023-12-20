@@ -54,8 +54,8 @@
      * cancel wishlist
 
   10. Shopping cart (**Michael**)
-     * List pembelian (nama buku + harga)
-     * Pencet beli
+      * List pembelian (nama buku + harga)
+      * Pencet beli
 
 ## Role
        

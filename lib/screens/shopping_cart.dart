@@ -70,7 +70,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     
   Future<List<Cart>> fetchProduct(request) async {
       var response = await request.get('https://libpanda-e15-tk.pbp.cs.ui.ac.id/shoppingcart/json/');
-      //final Cart cart;
+      final Cart cart;
 
       List<Cart> listCart = [];
       for (var d in response) {
