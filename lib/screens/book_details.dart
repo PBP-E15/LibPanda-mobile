@@ -46,38 +46,39 @@ class BookDetailsPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  color: Colors.grey[800],
                   child: Column(
                     children: [
                       ClipRRect(
                         borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                         child: SizedBox(
                           width: double.infinity,
-                          height: 300, // Adjust the height of the image
+                          height: 300,
                           child: Image.network(
                             book.fields.thumbnail,
-                            fit: BoxFit.contain, // Ensure the whole image is visible
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 16.0), // Adjust top padding
+                        padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 16.0), 
                         child: Column(
                           children: [
                             const Text(
                               'Price:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 24, // Increase font size of price text
-                                color: Colors.black87,
+                                fontSize: 24, 
+                                color: Colors.white,
                               ),
                             ),
-                            const SizedBox(height: 8), // Add space between price text and value
+                            const SizedBox(height: 8), 
                             Text(
                               formatCurrency.format(book.fields.price ?? 0),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 32, // Increase font size of price value
-                                color: Colors.black87,
+                                fontSize: 32,
+                                color: Colors.white,
                               ),
                             ),
                           ],
@@ -172,6 +173,7 @@ class BookDetailsPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  color: Color.fromARGB(255, 255, 253, 208),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(

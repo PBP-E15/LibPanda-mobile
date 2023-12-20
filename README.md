@@ -1,12 +1,12 @@
-# LibPanda
+# LibPanda - Mobile
 
 ## Anggota Kelompok
 
   1. Michael Marcellino Satyanegara		    - 2206083325
   2. Musthofa Joko Anggoro			          - 2206082354
   3. Nyasia Aludra Yasmina			          - 2206828185
-  4. Darryl Abysha Artapradana Subiyanto 	- 2206082846
-  5. Kevin Yehezkiel Manurung 			      - 2206826974
+  4. Darryl Abysha Artapradana Subiyanto 	 - 2206082846
+  5. Kevin Yehezkiel Manurung 			    - 2206826974
 
 ## Tentang Aplikasi
   LibPanda adalah aplikasi pencarian dan pembelian buku yang memungkinkan pengguna untuk dengan cepat mencari, membandingkan, dan membeli buku favorit mereka. Aplikasi ini menawarkan akses ke katalog buku yang luas sehingga membuat proses mencari dan memilih buku menjadi lebih mudah dan efisien. Dengan fitur pencarian canggih, LibPanda adalah aplikasi yang sangat berguna bagi para pecinta buku.
@@ -20,35 +20,40 @@
 
 ## Modul
 
-  1. Login / Register (**Nyasia**)
-  2. Landing Page
+  1. Login (**Kevin & Darryl**)
+
+  2. Register (**Nyasia**)
+
+  3. Logout (**Topa**)
+
+  4. Landing Page (**Darryl**)
      * Navbar : Menu
      * Card : Menampilkan buku 
        
-  3. Page untuk mencari buku (**Topa**)
+  5. Page untuk mencari buku (**Topa**)
      * Tombol sort (by categories, by harga)
 
-  4. Informasi Buku (**Darryl**)
+  6. Informasi Detail Buku (**Darryl**)
      * Button wishlist
      * Button beli
      * Sinopsis
      * Detail buku (pengarang, tahun terbit, jumlah halaman)
        
-  5. Form Request Buku (**Nyasia**)
+  7. Form Request Buku (**Nyasia**)
      * Nama buku
      * Pengarang
      * Genre
      * Tahun terbit
        
-  6. Profil akun (**Topa**)
+  8. Profil akun (**Topa**)
      * Biodata
      * Wallet
        
-  7. Wishlist (**Kevin**)
+  9. Wishlist (**Kevin**)
      * List buku
      * cancel wishlist
 
-  8. Shopping cart (**Michael**)
+  10. Shopping cart (**Michael**)
      * List pembelian (nama buku + harga)
      * Pencet beli
 
@@ -58,10 +63,7 @@
      * Untuk melakukan segala interaksi pada aplikasi web yang tersedia
      * Dapat melakukan pencarian, pembelian, wishlist dan request buku
      * Dapat mengubah profil diri beserta walletnya
-       
-  2. Guest
-     * Untuk melakukan segala interaksi pada aplikasi web yang tersedia
-     * Hanya dapat melakukan pencarian dan melihat buku yang tersedia
+
 
 ## Alur pengintegrasian dengan web service untuk terhubung dengan aplikasi web yang sudah dibuat saat Proyek Tengah Semester
 
@@ -88,3 +90,6 @@ https://docs.google.com/spreadsheets/d/1R02rxZ5iQ4Xf_kZ2pMGI5ohSjR8sL9KTf8LETBCZ
 
 ## Sumber dataset katalog
 https://www.kaggle.com/datasets/dylanjcastillo/7k-books-with-metadata
+
+## Link AppCenter Deployment
+https://install.appcenter.ms/orgs/admin-libpanda/apps/libpanda/distribution_groups/public

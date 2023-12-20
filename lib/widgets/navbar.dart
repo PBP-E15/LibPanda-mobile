@@ -17,9 +17,13 @@ class Navbar extends StatelessWidget {
         unselectedItemColor: const Color.fromARGB(255, 165, 165, 165),
         currentIndex: currentIndex,
         onTap: onTap,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Image.asset(
+              'images/logo_libpanda.png',
+              width: 40, // Set the width as needed
+              height: 40, // Set the height as needed
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(

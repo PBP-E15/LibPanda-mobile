@@ -38,13 +38,30 @@ class _RegistrationPageState extends State<RegistrationPage> {
             color: Colors.black87,
             colorBlendMode: BlendMode.darken,
           ),
-          Container(
-           
+           Container(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Card(
+                    color: Colors.green.shade800,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Register your new account here!',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
                   Card(
                     color: const Color.fromARGB(255, 255, 253, 208),
                     child: Padding(

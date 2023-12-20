@@ -128,7 +128,6 @@ class _BookHomePageState extends State<BookHomePage> {
         listBookOriginal = books;
       }
 
-      // Shuffle the list of books
       books.shuffle();
 
       return books;
@@ -212,7 +211,7 @@ class _BookHomePageState extends State<BookHomePage> {
                 itemBuilder: (context, index) {
                 return Card(
                   elevation: 5,
-                  color: Colors.grey[800], // Slightly brighter grey for the card background
+                  color: Colors.grey[800],
 
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
@@ -230,11 +229,9 @@ class _BookHomePageState extends State<BookHomePage> {
                           ),
                         );
                       },
-                      // Add onTap functionality
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          // Update image layout and placeholder
                           Expanded(
                               child: Image.network(
                                 listBook[index].fields.thumbnail,
@@ -244,9 +241,8 @@ class _BookHomePageState extends State<BookHomePage> {
                                     fallbackWidth: 100,
                                   );
                                 },
-                                //fit: BoxFit.cover, // Adjust the image to cover the space
-                                width: 150, // Take full available width
-                                height: double.infinity, // Set a fixed height for the image
+                                width: 150,
+                                height: double.infinity, 
                               ),
                             ),
                           Padding(

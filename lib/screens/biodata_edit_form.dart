@@ -205,8 +205,6 @@ class _EditBiodataPageState extends State<EditBiodataPage> {
                                 'gender': genderController.text,
                                 'birthday': birthdayOriginal.toString().split(' ')[0],
                                 'phone_number': phoneNumberController.text,
-
-                                // TODO: Sesuaikan field data sesuai dengan aplikasimu
                               }));
 
                           if (nameController.text.compareTo(widget.biodata.fields.name) == 0 &&

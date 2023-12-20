@@ -91,7 +91,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
         backgroundColor: Colors.green.shade800,
         foregroundColor: Colors.white,
       ),
-      body: FutureBuilder(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'images/bglogin.jpg',
+            fit: BoxFit.cover,
+            color: Colors.black87,
+            colorBlendMode: BlendMode.darken,
+          ),
+          FutureBuilder(
         future: fetchProduct(request),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.data == null) {
@@ -139,7 +148,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         return Container(
                                           width: 100,
                                           height: 150,
-                                          color: Colors.grey,
+                                          //color: Colors.grey,
                                           child: const Center(
                                             child: Icon(Icons.error),
                                           ),
@@ -331,11 +340,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
                   ),
                 const SizedBox(height: 8),
-                ],
-              );
-            }
-          }
-        },
+                   ],
+                  );
+                }
+              }
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: Navbar(
         currentIndex: _currentIndex,

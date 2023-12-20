@@ -95,16 +95,16 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                           labelText: 'Username',
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green.shade800), // Border color when focused
+                            borderSide: BorderSide(color: Colors.green.shade800), 
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           filled: true,
-                          fillColor: Colors.green[50], // Fill color
+                          fillColor: Colors.green[50], 
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green.shade800), // Focused border color
+                            borderSide: BorderSide(color: Colors.green.shade800), 
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          hintStyle: TextStyle(color: Colors.green.shade800), // Hint color
+                          hintStyle: TextStyle(color: Colors.green.shade800),
                           labelStyle: TextStyle(color: Colors.green.shade800),
                         ),
                       ),
@@ -114,16 +114,16 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green.shade800), // Border color when focused
+                            borderSide: BorderSide(color: Colors.green.shade800), 
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           filled: true,
-                          fillColor: Colors.green[50], // Fill color
+                          fillColor: Colors.green[50],
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green.shade800), // Focused border color
+                            borderSide: BorderSide(color: Colors.green.shade800), 
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          hintStyle: TextStyle(color: Colors.green.shade800), // Hint color
+                          hintStyle: TextStyle(color: Colors.green.shade800),
                           labelStyle: TextStyle(color: Colors.green.shade800),
                         ),
                         obscureText: true,
